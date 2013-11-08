@@ -13,7 +13,7 @@
 @interface ChooseConnectionViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 {
     NSString *stringfromurlTextField;
-    NSArray *connections;
+   // NSArray *connections;
     sqlite3 *formulizeDB;
     NSString *databasePath;
 }
@@ -22,8 +22,9 @@
 
 @property (nonatomic, retain) NSString *str;
 
-@property (nonatomic, retain) NSMutableArray *connectionArray;
+//@property (nonatomic, retain) NSMutableArray *connectionArray;
 
 + (id)retrieveData;
+-(IBAction)getConnection:(id)sender;
 
 @end

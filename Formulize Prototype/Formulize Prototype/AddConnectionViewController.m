@@ -7,6 +7,7 @@
 //
 
 #import "AddConnectionViewController.h"
+#import "AppDelegate.h"
 
 @implementation AddConnectionViewController
 @synthesize urlNameLabel;
@@ -72,9 +73,7 @@ NSLog(@"Load");
             NSLog(@"Failed to open/create database");
         }
     }
-  //  NSString *querySQL = [NSString stringWithFormat: 
- //     @"SELECT ConnectionName, phone FROM Formulize WHERE Co\"%@\"", name.text];
-    //[filemgr release];
+ 
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
 }
@@ -192,30 +191,38 @@ NSLog(@"Load");
         
         if (sqlite3_prepare_v2(formulizeDB, query_stmt, -1, &statement, NULL) == SQLITE_OK)
         {
-            if (sqlite3_step(statement) == SQLITE_ROW)
-            {
+            AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+            while (sqlite3_step(statement) == SQLITE_ROW) {
+                // The second parameter indicates the column index into the result set.
                 NSString *connetionName = [[NSString alloc] 
                                            initWithUTF8String:
                                            (const char *) sqlite3_column_text(
                                                                               statement, 0)];
                 
+                
+                NSMutableArray *connectionArray = [[NSMutableArray alloc] init];
+                appDelegate.connections = connectionArray;
+                
+                //[connectionArray nil];
+                
                 //      connectionArray = [[NSMutableArray alloc] init];
                 //     [connectionArray addObject:connetionName];
                 
-                
-                
                 NSLog(@"Connection name retrieved: %@", connetionName);
-                
-            } else {
-                
-                NSLog(@"Connection name could not be retrieved");            }
-            sqlite3_finalize(statement);
+            }
+            NSLog(@"Connections Array3: %@",appDelegate.connections);
+            
+        } else {
+            
+            NSLog(@"Connection name could not be retrieved"); 
         }
-        sqlite3_close(formulizeDB);
+        sqlite3_finalize(statement);
     }
+    sqlite3_close(formulizeDB);
     
 }//end of get connection  
-    
+
+
 
 
 @end

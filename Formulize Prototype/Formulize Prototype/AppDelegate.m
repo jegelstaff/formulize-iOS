@@ -11,12 +11,14 @@
 @implementation AppDelegate
 
 @synthesize window = _window;
-//@synthesize connections;
+@synthesize connections;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+     NSLog(@"Connections Array1: %@",connections);
     return YES;
+    
 }
 							
 - (void)applicationWillResignActive:(UIApplication *)application
