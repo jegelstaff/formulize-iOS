@@ -38,6 +38,8 @@
 
 @property (strong, nonatomic) IBOutlet UITextField *passwordTextField;
 
+@property (strong, nonatomic) IBOutlet UIButton *loginButton;
+
 //@property (strong, nonatomic) IBOutlet UIButton * saveButton;
 
 - (IBAction)onoffSwitch:(id)sender;
@@ -46,7 +48,9 @@
 
 - (IBAction)saveConnection:(id)sender;
 
--(IBAction)getConnection:(id)sender;
+- (IBAction)getConnection:(id)sender;
+
+- (IBAction)clickLoginButton:(id)sender;
 //@property (strong, nonatomic) id <AddConnectionDelegate> delegate;
 
 @end
