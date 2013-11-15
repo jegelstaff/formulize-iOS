@@ -8,6 +8,12 @@
 
 #import "AppDelegate.h"
 
+
+@interface AppDelegate (Private)
+- (void)createEditableCopyOfDatabaseIfNeeded;
+
+@end
+
 @implementation AppDelegate
 
 @synthesize window = _window;
@@ -16,11 +22,81 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
-     NSLog(@"Connections Array1: %@",connections);
+    [self createEditableCopyOfDatabaseIfNeeded];
+	[self initializeDatabase];
     return YES;
     
 }
-							
+
+- (void)createEditableCopyOfDatabaseIfNeeded
+{
+    // First, test for existence.
+    BOOL success;
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSError *error;
+    
+    // Get the documents directory
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    
+    // Build the path to the database file
+    NSString *writableDBPath = [documentsDirectory stringByAppendingPathComponent:@"formulizeios.db"];
+    success = [fileManager fileExistsAtPath:writableDBPath];
+    if (success) return;
+    
+    // The writable database does not exist, so copy the default to the appropriate location.
+    NSString *defaultDBPath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"formulizeios.db"];
+    success = [fileManager copyItemAtPath:defaultDBPath toPath:writableDBPath error:&error];
+    if (!success) {
+        NSAssert1(0, @"Failed to create writable database file with message '%@'.", [error localizedDescription]);
+    }    
+    
+}
+
+- (void)initializeDatabase
+{
+    NSMutableArray *connectionsArray = [[NSMutableArray alloc] init];
+    self.connections = connectionsArray;
+    
+    // The database is stored in the application bundle. 
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    NSString *path = [documentsDirectory stringByAppendingPathComponent:@"formulizeios.db"];
+    
+    // Open the database.
+    if (sqlite3_open([path UTF8String], &database) == SQLITE_OK) {
+        // Get the primary key for all connections.
+        const char *sql = "SELECT id FROM connections";
+        sqlite3_stmt *statement;
+        
+        if (sqlite3_prepare_v2(database, sql, -1, &statement, NULL) == SQLITE_OK) {
+            while (sqlite3_step(statement) == SQLITE_ROW) {
+                int primaryKey = sqlite3_column_int(statement, 0);
+                
+                Connection *cn = [[Connection alloc] initWithPrimaryKey:primaryKey database:database];
+				
+                [connections addObject:cn];
+            }
+        }
+        sqlite3_finalize(statement);
+    } else {
+        sqlite3_close(database);
+        NSAssert1(0, @"Failed to open database with message '%s'.", sqlite3_errmsg(database));
+    }
+    
+}
+
+-(void)removeConnection:(Connection *)connection {
+    
+    //Gets the index of the connection to be removed from the connections array
+	NSUInteger index = [connections indexOfObject:connection];
+    
+    if (index == NSNotFound) return;
+    
+    [connection deleteFromDatabase];
+    [connections removeObject:connection];
+}
+
 - (void)applicationWillResignActive:(UIApplication *)application
 {
     /*

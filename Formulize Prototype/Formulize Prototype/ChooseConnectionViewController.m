@@ -7,75 +7,39 @@
 //
 
 #import "ChooseConnectionViewController.h"
-#import "AddConnectionViewController.h"
+#import "Connection.h"
 #import "AppDelegate.h"
 
 @implementation ChooseConnectionViewController
 
-@synthesize tableView;
-//@synthesize connectionArray;
-@synthesize str;
+//@synthesize tableView;
+@synthesize addView;
+
 
 - (void)viewWillAppear:(BOOL)animated {
-    [self.tableView reloadData];
+    //[self.tableView reloadData];
 }
 
 - (void)viewDidLoad
 {
-  //  [super reloadInputViews];
+ 
     [super viewDidLoad];
-    //call retrieve data method
-   // [self getConnection:nil];
-    
-	//connections = [NSArray arrayWithObjects:@"Connection1", @"Connection2", nil];
-  //  connections = [[NSArray alloc]initWithObjects:str,nil];
-    //NSLog(@"url: %@",str);
-    //NSLog(@"connections: %@", connections);
+    self.navigationItem.leftBarButtonItem = self.editButtonItem;
+  
 }
 
-/*- (IBAction)getConnection:(id)sender {
-    
-    
-    const char *dbpath = [databasePath UTF8String];
-    sqlite3_stmt    *statement;
-    
-    if (sqlite3_open(dbpath, &formulizeDB) == SQLITE_OK)
-    {
-        NSString *querySQL = [NSString stringWithFormat: 
-                              @"SELECT ConnectionName FROM ConnectionEntry"];
-        
-        const char *query_stmt = [querySQL UTF8String];
-        
-        if (sqlite3_prepare_v2(formulizeDB, query_stmt, -1, &statement, NULL) == SQLITE_OK)
-        {
-            while (sqlite3_step(statement) == SQLITE_ROW) {
-                // The second parameter indicates the column index into the result set.
-                NSString *connetionName = [[NSString alloc] 
-                                           initWithUTF8String:
-                                           (const char *) sqlite3_column_text(
-                                                                              statement, 0)];
-                
-                AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-                NSMutableArray *connectionArray = [[NSMutableArray alloc] init];
-                appDelegate.connections = connectionArray;
-                //[connectionArray nil];
-                
-                //      connectionArray = [[NSMutableArray alloc] init];
-                //     [connectionArray addObject:connetionName];
-                
-                NSLog(@"Connection name retrieved: %@", connetionName);
-                }
-                
-            } else {
-                
-                NSLog(@"Connection name could not be retrieved"); 
-            }
-            sqlite3_finalize(statement);
-        }
-        sqlite3_close(formulizeDB);
-    
-}//end of get connection  
- */
+- (void)setEditing:(BOOL)editing animated:(BOOL)animated {
+    // Updates the appearance of the Edit|Done button as necessary.
+    [super setEditing:editing animated:animated];
+    [self.tableView setEditing:editing animated:YES];
+    // Disable the add button while editing.
+    if (editing) {
+        self.navigationItem.rightBarButtonItem.enabled = NO;
+    } else {
+        self.navigationItem.rightBarButtonItem.enabled = YES;
+    }
+}
+
 
 - (void)viewDidUnload {
 
@@ -84,11 +48,14 @@
 
 #pragma mark - TableView Data Source Methods
 
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+	return 1;
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     return appDelegate.connections.count;
-   //return [connections count];
 }
 
 
@@ -102,18 +69,52 @@
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:simpleTableIdentifier];
     }
-    
-    cell.textLabel.text = [appDelegate.connections objectAtIndex:indexPath.row];
+    Connection *cn = [appDelegate.connections objectAtIndex:indexPath.row];
+    cell.textLabel.text = cn.name;
     return cell;
 
-    NSLog(@"Connections Array2: %@",appDelegate.connections);
 }
 
-/*-(void) passItemBack:(AddConnectionViewController *)controller didAddConnection:(NSString *)url
+#pragma mark - TableView Delegate Methods
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    connections = [[NSArray alloc]initWithObjects:url,nil];
-    NSLog(@"url: %@",url);
-    NSLog(@"connections: %@", connections);
-}*/
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    Connection *cn = [appDelegate.connections objectAtIndex:indexPath.row];
+    NSString *username = cn.username;
+    NSString *password = cn.password;
+    
+    
+    UIAlertView *loginalert = [[UIAlertView alloc] initWithTitle:@"Login Credentials"
+                                                         message:nil
+                                                        delegate:self
+                                               cancelButtonTitle:@"Cancel"
+                                               otherButtonTitles:@"Login", nil];
+    [loginalert setAlertViewStyle:UIAlertViewStyleLoginAndPasswordInput];
+    
+    UITextField *utextfield = [loginalert textFieldAtIndex:0];
+    utextfield.text = username;
+    
+    UITextField *ptextfield = [loginalert textFieldAtIndex:1];
+    ptextfield.text = password;
+    
+    [loginalert show];
+    
+}
+
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:
+(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+	
+	AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+	Connection *cn = (Connection *)[appDelegate.connections objectAtIndex:indexPath.row];
+	
+	if (editingStyle == UITableViewCellEditingStyleDelete) {
+		[appDelegate removeConnection:cn];
+		// Delete the row from the data source
+		[tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:YES];
+	}	
+}
+
 
 @end

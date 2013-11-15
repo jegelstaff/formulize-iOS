@@ -7,24 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "/usr/include/sqlite3.h"
+//#import <sqlite3.h>
 #import "AddConnectionViewController.h"
 
-@interface ChooseConnectionViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
+@interface ChooseConnectionViewController : UITableViewController <UITableViewDelegate, UITableViewDataSource>
 {
-    NSString *stringfromurlTextField;
-   // NSArray *connections;
-    sqlite3 *formulizeDB;
-    NSString *databasePath;
+    AddConnectionViewController *addView;
 }
 
-@property (nonatomic, strong) IBOutlet UITableView *tableView;
+//@property (nonatomic, strong) IBOutlet UITableView *tableView;
 
-@property (nonatomic, retain) NSString *str;
-
-//@property (nonatomic, retain) NSMutableArray *connectionArray;
-
-+ (id)retrieveData;
--(IBAction)getConnection:(id)sender;
+@property(nonatomic,retain) AddConnectionViewController *addView;
 
 @end

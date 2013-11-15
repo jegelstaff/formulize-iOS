@@ -7,34 +7,26 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "/usr/include/sqlite3.h"
+#import <sqlite3.h>
+#import "AppDelegate.h"
 
-//@class AddConnectionViewController;
-//@protocol AddConnectionDelegate <NSObject>
-
-//-(void) passItemBack:(AddConnectionViewController *)controller didAddConnection:(NSString *)url;
 
 
 @interface AddConnectionViewController : UIViewController <UITextFieldDelegate>
 {
+    UITextField *urlNameTextField;
+    UITextField *urlTextField;
+    UITextField *usernameTextField;
+    UITextField *passwordTextField;
     sqlite3 *formulizeDB;
     NSString *databasePath;
-    NSString *status;
 }
-
-@property (strong, nonatomic) IBOutlet UILabel *urlNameLabel;
 
 @property (strong, nonatomic) IBOutlet UITextField *urlNameTextField;
 
-@property (strong, nonatomic) IBOutlet UILabel *urlLabel;
-
 @property (strong, nonatomic) IBOutlet UITextField *urlTextField;
 
-@property (strong, nonatomic) IBOutlet UILabel *usernameLabel;
-
 @property (strong, nonatomic) IBOutlet UITextField *usernameTextField;
-
-@property (strong, nonatomic) IBOutlet UILabel *passwordLabel;
 
 @property (strong, nonatomic) IBOutlet UITextField *passwordTextField;
 
@@ -48,9 +40,7 @@
 
 - (IBAction)saveConnection:(id)sender;
 
-- (IBAction)getConnection:(id)sender;
-
 - (IBAction)clickLoginButton:(id)sender;
-//@property (strong, nonatomic) id <AddConnectionDelegate> delegate;
+
 
 @end

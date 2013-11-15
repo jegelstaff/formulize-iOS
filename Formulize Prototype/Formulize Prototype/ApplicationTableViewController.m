@@ -9,10 +9,7 @@
 #import "ApplicationTableViewController.h"
 
 @implementation ApplicationTableViewController
-/*
-{
-    NSArray *applicationData;
-}
+
 
 - (void)didReceiveMemoryWarning
 {
@@ -85,5 +82,5 @@
     
     return cell;
 }
-*/
+
 @end

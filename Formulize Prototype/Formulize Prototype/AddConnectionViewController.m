@@ -7,17 +7,12 @@
 //
 
 #import "AddConnectionViewController.h"
-#import "AppDelegate.h"
 #import <Foundation/NSJSONSerialization.h>
 
 @implementation AddConnectionViewController
-@synthesize urlNameLabel;
 @synthesize urlNameTextField;
-@synthesize urlLabel;
 @synthesize urlTextField;
-@synthesize usernameLabel;
 @synthesize usernameTextField;
-@synthesize passwordLabel;
 @synthesize passwordTextField;
 
 @synthesize loginButton;//test button
@@ -32,50 +27,7 @@
 #pragma mark - View lifecycle
 
 - (void)viewDidLoad
-{
-NSLog(@"Load");
-    NSString *docsDir;
-    NSArray *dirPaths;
-    
-    // Get the documents directory
-    dirPaths = NSSearchPathForDirectoriesInDomains(
-       NSDocumentDirectory, NSUserDomainMask, YES);
-    
-    docsDir = [dirPaths objectAtIndex:0];
-    
-    // Build the path to the database file
-    databasePath = [[NSString alloc] 
-    initWithString: [docsDir stringByAppendingPathComponent: 
-@"Formulize.db"]];
-    
-    NSFileManager *filemgr = [NSFileManager defaultManager];
-    
-    if ([filemgr fileExistsAtPath: databasePath ] == NO)
-    {
-        NSLog(@"db does not exist");
-        const char *dbpath = [databasePath UTF8String];
-        
-        if (sqlite3_open(dbpath, &formulizeDB) == SQLITE_OK)
-        {
-            //NSLog(@"creating table");
-            char *errMsg;
-            const char *sql_stmt = "CREATE TABLE IF NOT EXISTS ConnectionEntry (ID INTEGER PRIMARY KEY AUTOINCREMENT, ConnectionName TEXT, ConnectionURL TEXT, Username TEXT, Password TEXT)";
-            
-            if (sqlite3_exec(formulizeDB, sql_stmt, NULL, NULL, &errMsg) != SQLITE_OK)
-            {
-                status = @"Failed to create table";
-                //NSLog(status);
-                NSLog(@"Failed to create table");
-            }
-            
-            sqlite3_close(formulizeDB);
-            
-        } else {
-            status = @"Failed to open/create database";
-            NSLog(@"Failed to open/create database");
-        }
-    }
- 
+{ 
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
 }
@@ -83,13 +35,9 @@ NSLog(@"Load");
 - (void)viewDidUnload
 {
     
-    [self setUrlLabel:nil];
     [self setUrlTextField:nil];
-    [self setUsernameLabel:nil];
     [self setUsernameTextField:nil];
-    [self setPasswordLabel:nil];
     [self setPasswordTextField:nil];
-    [self setUrlNameLabel:nil];
     [self setUrlNameTextField:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
@@ -135,11 +83,14 @@ NSLog(@"Load");
     [urlTextField resignFirstResponder];
     [usernameTextField resignFirstResponder];
     [passwordTextField resignFirstResponder];
+    [urlNameTextField resignFirstResponder];
 }
 
 - (IBAction)saveConnection:(id)sender {
+    //Commented this section out because it's not necessary. User can decide to leave username or password blank.
+    //Need to modify to make sure url is not blank
     
-    NSString *errorMsg= @"Please enter the ";
+   /* NSString *errorMsg= @"Please enter the ";
     Boolean IsInfoComplete;
     
     if([urlTextField.text isEqualToString:@""] || [usernameTextField.text isEqualToString:@""] || [passwordTextField.text isEqualToString:@""]){
@@ -169,93 +120,72 @@ NSLog(@"Load");
                                               cancelButtonTitle:@"OK"
                                               otherButtonTitles:nil];
         [alert show];
-    }
-    else{
+    }*/
+    //else{
         
-        NSLog(@"Save connection");
-        sqlite3_stmt    *statement;
+        NSString *docsDir;
+        NSArray *dirPaths;
+        
+        // Get the documents directory
+        dirPaths = NSSearchPathForDirectoriesInDomains(
+                                                       NSDocumentDirectory, NSUserDomainMask, YES);
+        docsDir = [dirPaths objectAtIndex:0];
+        
+        // Build the path to the database file
+        databasePath = [[NSString alloc] 
+                        initWithString: [docsDir stringByAppendingPathComponent: 
+                                         @"formulizeios.db"]];
+        
         const char *dbpath = [databasePath UTF8String];
         
+        sqlite3_stmt    *statement;
+        
+        /* open the database and insert new connection. values for the connection are gotten from each corresponding textfield. An alert view is displayed if connection was added successfully.
+         */
         if (sqlite3_open(dbpath, &formulizeDB) == SQLITE_OK)
         {
-            NSString *insertSQL = [NSString stringWithFormat:@"INSERT INTO ConnectionEntry (ConnectionName, ConnectionURL, Username, Password)VALUES(\"%@\",\"%@\",\"%@\", \"%@\")",
-              urlNameTextField.text, urlTextField.text, usernameTextField.text, passwordTextField.text];
-              const char *insert_stmt = [insertSQL UTF8String];
-              sqlite3_prepare_v2(formulizeDB, insert_stmt, 
-             -1, &statement, NULL);
-              if (sqlite3_step(statement) == SQLITE_DONE)
-              {
-                  status = @"Connection added";
-                  NSLog(status);
-                  NSLog(@"Connection added");
-                  urlNameTextField.text = @"";
-                  urlTextField.text = @"";
-                  usernameTextField.text = @"";
-                  passwordTextField.text = @"";
-              } else {
-                  status= @"Failed to add connnection";
-                  NSLog(@"Failed to add connnection");
-              }
-              sqlite3_finalize(statement);
-              sqlite3_close(formulizeDB);
-          }
+            NSString *insertSQL = [NSString stringWithFormat:@"INSERT INTO connections (name, url, username, password)VALUES(\"%@\",\"%@\",\"%@\", \"%@\")",
+                                   urlNameTextField.text, urlTextField.text, usernameTextField.text, passwordTextField.text];
+            const char *insert_stmt = [insertSQL UTF8String];
+            sqlite3_prepare_v2(formulizeDB, insert_stmt, 
+                               -1, &statement, NULL);
+            if (sqlite3_step(statement) == SQLITE_DONE)
+            {
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:@"Connection Added!" delegate:self cancelButtonTitle:nil otherButtonTitles:nil];
+                [alert show];
+                [self performSelector:@selector(dismissAlert:) withObject:alert afterDelay:1.0f];
+                
+                urlNameTextField.text = @"";
+                urlTextField.text = @"";
+                usernameTextField.text = @"";
+                passwordTextField.text = @"";
+            } 
+            else {
+                
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:@"Unable to add connection!" delegate:self cancelButtonTitle:nil otherButtonTitles:nil];
+                [alert show];
+                [self performSelector:@selector(dismissAlert:) withObject:alert afterDelay:1.0f];
+                
+                NSLog(@"Failed to add connnection");
+            }
+            sqlite3_finalize(statement);
+            sqlite3_close(formulizeDB);
+        }
         
-        //call retrieve data method
-        [self getConnection:nil];
+        AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+        [appDelegate initializeDatabase];  //call the initializeDatabase method to reload the connections list
         
          
        [self.navigationController popToRootViewControllerAnimated:YES]; 
-    }
+   // }
  
 }
-//end of save connection        
 
-
-- (IBAction)getConnection:(id)sender {
-    
-    
-    const char *dbpath = [databasePath UTF8String];
-    sqlite3_stmt    *statement;
-    
-    if (sqlite3_open(dbpath, &formulizeDB) == SQLITE_OK)
-    {
-        NSString *querySQL = [NSString stringWithFormat: 
-                              @"SELECT ConnectionName FROM ConnectionEntry"];
-        
-        const char *query_stmt = [querySQL UTF8String];
-        
-        if (sqlite3_prepare_v2(formulizeDB, query_stmt, -1, &statement, NULL) == SQLITE_OK)
-        {
-            AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-            while (sqlite3_step(statement) == SQLITE_ROW) {
-                // The second parameter indicates the column index into the result set.
-                NSString *connetionName = [[NSString alloc] 
-                                           initWithUTF8String:
-                                           (const char *) sqlite3_column_text(
-                                                                              statement, 0)];
-                
-                
-                NSMutableArray *connectionArray = [[NSMutableArray alloc] init];
-                appDelegate.connections = connectionArray;
-                
-                //[connectionArray nil];
-                
-                //      connectionArray = [[NSMutableArray alloc] init];
-                //     [connectionArray addObject:connetionName];
-                
-                NSLog(@"Connection name retrieved: %@", connetionName);
-            }
-            NSLog(@"Connections Array3: %@",appDelegate.connections);
-            
-        } else {
-            
-            NSLog(@"Connection name could not be retrieved"); 
-        }
-        sqlite3_finalize(statement);
-    }
-    sqlite3_close(formulizeDB);
-    
-}//end of get connection  
+//Method to dismiss alert view
+-(void)dismissAlert:(UIAlertView *) alertView
+{
+    [alertView dismissWithClickedButtonIndex:0 animated:YES];
+}
 
 - (IBAction)clickLoginButton:(id)sender{
     

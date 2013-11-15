@@ -7,11 +7,20 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <sqlite3.h>
+#import "Connection.h"
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate>
+@interface AppDelegate : UIResponder <UIApplicationDelegate>{
+    sqlite3 *database;
+    NSMutableArray *connections;
+}
 
 @property (strong, nonatomic) UIWindow *window;
 
 @property (nonatomic, retain) NSMutableArray *connections;
+
+- (void)initializeDatabase;
+- (void)removeConnection:(Connection *)connection;
+//- (Todo *)addConnection:(Connection *)connection;
 
 @end

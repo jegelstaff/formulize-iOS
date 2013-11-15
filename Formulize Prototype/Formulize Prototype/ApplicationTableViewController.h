@@ -9,5 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface ApplicationTableViewController : UITableViewController<UITableViewDelegate,UITableViewDataSource>
+{
+    NSArray *applicationData;
+}
 
 @end
