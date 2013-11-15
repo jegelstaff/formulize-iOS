@@ -7,10 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MenuLinksTableViewController.h"
 
 @interface ApplicationTableViewController : UITableViewController<UITableViewDelegate,UITableViewDataSource>
-{
-    NSArray *applicationData;
-}
+
+@property (strong, nonatomic) NSArray *applicationsData;
+@property (strong, nonatomic) NSArray *menuLinksForApp;
+
+@property (strong, nonatomic) IBOutlet UIButton *sendData;
 
 @end

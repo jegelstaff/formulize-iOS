@@ -30,7 +30,6 @@
 
 @property (strong, nonatomic) IBOutlet UITextField *passwordTextField;
 
-@property (strong, nonatomic) IBOutlet UIButton *loginButton;
 
 //@property (strong, nonatomic) IBOutlet UIButton * saveButton;
 
@@ -40,7 +39,6 @@
 
 - (IBAction)saveConnection:(id)sender;
 
-- (IBAction)clickLoginButton:(id)sender;
 
 
 @end

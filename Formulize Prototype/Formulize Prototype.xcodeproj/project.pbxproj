@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		254F794418308CB300080B80 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 254F794318308CB300080B80 /* Default@2x.png */; };
 		254F794718308CC700080B80 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 254F794618308CC700080B80 /* Default.png */; };
+		25A042521836846B00BE80B9 /* MenuLinksTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 25A0424E1836846B00BE80B9 /* MenuLinksTableViewController.m */; };
+		25A042531836846B00BE80B9 /* screenWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 25A0424F1836846B00BE80B9 /* screenWebViewController.m */; };
 		4493F6AA18086FFC002C636B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4493F6A918086FFC002C636B /* UIKit.framework */; };
 		4493F6AC18086FFC002C636B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4493F6AB18086FFC002C636B /* Foundation.framework */; };
 		4493F6AE18086FFC002C636B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4493F6AD18086FFC002C636B /* CoreGraphics.framework */; };
@@ -29,6 +31,10 @@
 /* Begin PBXFileReference section */
 		254F794318308CB300080B80 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		254F794618308CC700080B80 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		25A0424E1836846B00BE80B9 /* MenuLinksTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MenuLinksTableViewController.m; path = "../../../formulize/formulize-iOS copy/Formulize Prototype/Formulize Prototype/MenuLinksTableViewController.m"; sourceTree = "<group>"; };
+		25A0424F1836846B00BE80B9 /* screenWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = screenWebViewController.m; path = "../../../formulize/formulize-iOS copy/Formulize Prototype/Formulize Prototype/screenWebViewController.m"; sourceTree = "<group>"; };
+		25A042501836846B00BE80B9 /* MenuLinksTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MenuLinksTableViewController.h; path = "../../../formulize/formulize-iOS copy/Formulize Prototype/Formulize Prototype/MenuLinksTableViewController.h"; sourceTree = "<group>"; };
+		25A042511836846B00BE80B9 /* screenWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = screenWebViewController.h; path = "../../../formulize/formulize-iOS copy/Formulize Prototype/Formulize Prototype/screenWebViewController.h"; sourceTree = "<group>"; };
 		4493F6A518086FFC002C636B /* Formulize Prototype.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Formulize Prototype.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4493F6A918086FFC002C636B /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		4493F6AB18086FFC002C636B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -104,6 +110,10 @@
 		4493F6AF18086FFC002C636B /* Formulize Prototype */ = {
 			isa = PBXGroup;
 			children = (
+				25A0424E1836846B00BE80B9 /* MenuLinksTableViewController.m */,
+				25A0424F1836846B00BE80B9 /* screenWebViewController.m */,
+				25A042501836846B00BE80B9 /* MenuLinksTableViewController.h */,
+				25A042511836846B00BE80B9 /* screenWebViewController.h */,
 				4493F6B818086FFC002C636B /* AppDelegate.h */,
 				4493F6B918086FFC002C636B /* AppDelegate.m */,
 				4493F6BB18086FFC002C636B /* MainStoryboard.storyboard */,
@@ -206,6 +216,8 @@
 				44E208DE181ACF2200EE9771 /* ChooseConnectionViewController.m in Sources */,
 				44E208E1181AD4B500EE9771 /* ApplicationTableViewController.m in Sources */,
 				44EBF7CC183608E800238DAB /* Connection.m in Sources */,
+				25A042521836846B00BE80B9 /* MenuLinksTableViewController.m in Sources */,
+				25A042531836846B00BE80B9 /* screenWebViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

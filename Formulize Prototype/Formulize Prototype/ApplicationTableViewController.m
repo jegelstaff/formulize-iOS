@@ -10,6 +10,9 @@
 
 @implementation ApplicationTableViewController
 
+@synthesize applicationsData;
+@synthesize menuLinksForApp;
+@synthesize sendData;
 
 - (void)didReceiveMemoryWarning
 {
@@ -21,8 +24,10 @@
 
 - (void)viewDidLoad
 {
-    applicationData = [[NSArray alloc] initWithObjects:@"Wildlife Monitoring",@"Zoo Animal Caretaking", nil];
     [super viewDidLoad];
+    for(NSDictionary *item in applicationsData) {
+        NSLog(@"app: %@", [item objectForKey:@"name"]);
+    }
 	// Do any additional setup after loading the view, typically from a nib.
 }
 
@@ -64,7 +69,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [applicationData count];
+    return [applicationsData count];
 }
 
 
@@ -78,9 +83,27 @@
     {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"appCells"];
     }
-    cell.textLabel.text = [applicationData objectAtIndex:indexPath.row];
+    cell.textLabel.text = [[applicationsData objectAtIndex:indexPath.row]objectForKey:@"name"];
     
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    menuLinksForApp = [[applicationsData objectAtIndex:indexPath.row] objectForKey:@"links"];
+    [self performSegueWithIdentifier:@"sendMenuData" sender:sendData];
+}
+
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([[segue identifier] isEqualToString:@"sendMenuData"]) {
+        
+        // Get destination view
+        MenuLinksTableViewController *nextView = [segue destinationViewController];
+        
+        //set data to be sent
+        [nextView setMenuLinksText:menuLinksForApp];
+    }
 }
 
 @end

@@ -7,14 +7,17 @@
 //
 
 #import "ChooseConnectionViewController.h"
-#import "Connection.h"
-#import "AppDelegate.h"
+
 
 @implementation ChooseConnectionViewController
 
 //@synthesize tableView;
 @synthesize addView;
+@synthesize applicationsData;
+@synthesize Login;
+@synthesize isLoggedIn;
 
+NSString *connectionURL;
 
 - (void)viewWillAppear:(BOOL)animated {
     //[self.tableView reloadData];
@@ -81,25 +84,105 @@
 {
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     Connection *cn = [appDelegate.connections objectAtIndex:indexPath.row];
+    connectionURL = cn.url;
     NSString *username = cn.username;
     NSString *password = cn.password;
+    isLoggedIn = false;
+    if(!isLoggedIn){
+        
+       
+            UIAlertView *loginalert = [[UIAlertView alloc] initWithTitle:@"Login Credentials"
+                                                                 message:nil
+                                                                delegate:self
+                                                       cancelButtonTitle:@"Cancel"
+                                                       otherButtonTitles:@"Login", nil];
+            [loginalert setAlertViewStyle:UIAlertViewStyleLoginAndPasswordInput];
+            
+            UITextField *utextfield = [loginalert textFieldAtIndex:0];
+            utextfield.text = username;
+            
+            UITextField *ptextfield = [loginalert textFieldAtIndex:1];
+            ptextfield.text = password;
+        
+        [loginalert show];
+        
+    }
+
+}
+
+- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data{
+    
+    NSString* urldata =[[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
     
     
-    UIAlertView *loginalert = [[UIAlertView alloc] initWithTitle:@"Login Credentials"
-                                                         message:nil
-                                                        delegate:self
-                                               cancelButtonTitle:@"Cancel"
-                                               otherButtonTitles:@"Login", nil];
-    [loginalert setAlertViewStyle:UIAlertViewStyleLoginAndPasswordInput];
+    if([urldata characterAtIndex:0] =='1'){
+        isLoggedIn= true;
+        NSLog(@"logged in...");
+        
+        //request applications list
+        NSURL *app_list_url =[NSURL URLWithString:@"http://formulize@formulize.dev.freeform.ca/mobile/app_list.php"];
+        
+        NSMutableURLRequest* request = [NSURLRequest requestWithURL:app_list_url];
+        
+        NSURLConnection* connection = [[NSURLConnection alloc] initWithRequest:request delegate:self startImmediately:YES];
+        
+        if(!connection){
+            NSLog(@"error getting app list");
+        }
+    }
+    else if([urldata isEqualToString:@"0"]){
+        isLoggedIn= false;
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Invalid login" 
+                                                        message:@"Incorrect username or password" 
+                                                       delegate:nil 
+                                              cancelButtonTitle:@"OK"
+                                              otherButtonTitles:nil];
+        [alert show];
+        NSLog(@"NOT logged in...");
+    }
+    else{
+        
+        NSError *error;
+        applicationsData = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&error];
+        
+        if (error != nil) {
+            NSLog(@"Error");
+            
+        }else {
+            if ([applicationsData count] == 0){
+                NSLog(@"You have no permission to any app");
+            }
+        }
+        [self performSegueWithIdentifier:@"sendAppData" sender:Login];
+    }
     
-    UITextField *utextfield = [loginalert textFieldAtIndex:0];
-    utextfield.text = username;
+}
+
+- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex{
     
-    UITextField *ptextfield = [loginalert textFieldAtIndex:1];
-    ptextfield.text = password;
+    NSLog(@"click");
+    NSString *uinputText = [[alertView textFieldAtIndex:0] text];
+    NSString *pinputText = [[alertView textFieldAtIndex:1] text];
     
-    [loginalert show];
+    if (buttonIndex == 1){    
+        [self validateLogin:connectionURL :uinputText :pinputText];
+     }
+}
+
+
+- (BOOL)alertViewShouldEnableFirstOtherButton:(UIAlertView *)alertView
+{
+    NSString *uinputText = [[alertView textFieldAtIndex:0] text];
+    NSString *pinputText = [[alertView textFieldAtIndex:1] text];
     
+    if( [uinputText length] >0 && [pinputText length] >0 )
+    {
+        return YES;
+    }
+    else
+    {
+        return NO;
+    }
 }
 
 
@@ -115,6 +198,84 @@
 		[tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:YES];
 	}	
 }
+
+//pass application data to menuLinks screen
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([[segue identifier] isEqualToString:@"sendAppData"]) {
+        
+        // Get destination view
+        ApplicationTableViewController *nextView = [segue destinationViewController];
+        
+        [nextView setApplicationsData:applicationsData];
+    }
+}
+
+-(void)validateLogin:(NSString*)url :(NSString*)username :(NSString*)password{
+    // login data
+    NSString *login =@"login";
+    NSString *postInfo =[[NSString alloc] initWithFormat:@"op=%@&pass=%@&uname=%@",login, password, username];
+    NSURL *login_url=[NSURL URLWithString:url];
+    NSData *postData = [postInfo dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];  
+    NSString *postLength = [NSString stringWithFormat:@"%d", [postData length]];
+    
+    
+    // Create LOGIN request
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+    [request setURL:login_url];
+    [request setHTTPMethod:@"POST"];
+    [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
+    [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+    [request setHTTPBody:postData];
+    [request setCachePolicy:NSURLRequestReloadIgnoringLocalCacheData ];
+    [request setTimeoutInterval:250];
+    
+    
+    //Delete previous cookies before request
+    NSHTTPCookieStorage *cookieStorage = [NSHTTPCookieStorage sharedHTTPCookieStorage];
+    NSArray *allCookies = [cookieStorage cookiesForURL:[NSURL URLWithString:@"http://formulize.dev.freeform.ca"]];
+    for (NSHTTPCookie *each in allCookies) {
+        NSLog(@"delete:%@", each);
+        [cookieStorage deleteCookie:each];
+    }
+    
+    //load login request
+    NSError *error;
+    NSHTTPURLResponse *response;
+    
+    [NSURLConnection  sendSynchronousRequest:request returningResponse:&response error:&error ] ;
+    
+    if(error){ //case: URL is not found
+    	
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"URL cannot be found" 
+                                                        message:@"Please enter a valid URL" 
+                                                       delegate:nil 
+                                              cancelButtonTitle:@"OK"
+                                              otherButtonTitles:nil];
+        [alert show];
+    }
+    else{
+        
+        //check for cookies in domain
+        allCookies =[ cookieStorage cookiesForURL:[NSURL URLWithString:@"http://formulize.dev.freeform.ca"]];
+        NSLog(@"Connecting...");
+        
+        if ( allCookies.count > 0) {
+            
+            //new request to check if user is logged in
+            
+            NSURL *check_login_url=[NSURL URLWithString:@"http://formulize.dev.freeform.ca/mobile/isUserLoggedIn.php"];
+            request = [NSURLRequest requestWithURL:check_login_url];
+            NSURLConnection* connection = [[NSURLConnection alloc] initWithRequest:request delegate:self startImmediately:YES]; 
+            
+            if(!connection){
+                NSLog(@"error logging in...");
+            }
+            
+        }//end if(cookies>0)
+    }//end if(error)
+}
+
 
 
 @end
