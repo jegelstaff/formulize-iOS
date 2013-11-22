@@ -12,7 +12,7 @@
 
 @synthesize applicationsData;
 @synthesize menuLinksForApp;
-@synthesize sendData;
+
 
 - (void)didReceiveMemoryWarning
 {
@@ -25,9 +25,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    for(NSDictionary *item in applicationsData) {
-        NSLog(@"app: %@", [item objectForKey:@"name"]);
-    }
 	// Do any additional setup after loading the view, typically from a nib.
 }
 
@@ -90,7 +87,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     menuLinksForApp = [[applicationsData objectAtIndex:indexPath.row] objectForKey:@"links"];
-    [self performSegueWithIdentifier:@"sendMenuData" sender:sendData];
+    [self performSegueWithIdentifier:@"sendMenuData" sender:nil];
 }
 
 

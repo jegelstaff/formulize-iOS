@@ -12,8 +12,6 @@
 @interface MenuLinksTableViewController : UITableViewController<UITableViewDelegate,UITableViewDataSource>
 
 @property (strong, nonatomic) NSArray *MenuLinksText;
-@property (strong, nonatomic) NSString *menuLinkScreen;
-@property (strong, nonatomic) NSString *menuLinkID;
+@property(nonatomic, strong, retain)  NSDictionary *menuLink;
 
-@property (strong, nonatomic) IBOutlet UIButton *sendData;
 @end

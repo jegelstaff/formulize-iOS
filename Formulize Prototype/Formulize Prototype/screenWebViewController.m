@@ -11,15 +11,25 @@
 @implementation screenWebViewController
 
 @synthesize myview;
-@synthesize screen;
-@synthesize menuID;
+@synthesize menuLink;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+       
+    NSHTTPCookieStorage *cookieStorage = [NSHTTPCookieStorage sharedHTTPCookieStorage];
+    NSArray *allCookies = [cookieStorage cookiesForURL:[NSURL URLWithString:@"http://formulize.dev.freeform.ca"]];
+    for (NSHTTPCookie *each in allCookies) {
+        NSLog(@"webview cookie:%@", each.value);
+    }
+    
+    NSString* screen = [menuLink objectForKey:@"screen"];
+    NSString* menuID = [menuLink objectForKey:@"menu_id"];
+    //NSLog(@"screen: %@ meni id :%@", screen, menuID); 
+    
     
    /* 
-    screen=@"sid=9";
-    menuID=@"11";
+    NSString* screen = @"sid=9";
+    NSString* menuID = @"11";
     
     NSString *url = [NSString stringWithFormat:@"http://formulize.dev.freeform.ca/mobile/modules/formulize/index.php?%@&menuid=%@",screen, menuID];
     

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2549DA3F183F274B00FE7329 /* activeConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 2549DA3E183F274B00FE7329 /* activeConnection.m */; };
 		254F794418308CB300080B80 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 254F794318308CB300080B80 /* Default@2x.png */; };
 		254F794718308CC700080B80 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 254F794618308CC700080B80 /* Default.png */; };
 		4493F6AA18086FFC002C636B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4493F6A918086FFC002C636B /* UIKit.framework */; };
@@ -29,6 +30,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2549DA3D183F274B00FE7329 /* activeConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = activeConnection.h; sourceTree = "<group>"; };
+		2549DA3E183F274B00FE7329 /* activeConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = activeConnection.m; sourceTree = "<group>"; };
 		254F794318308CB300080B80 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		254F794618308CC700080B80 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		4493F6A518086FFC002C636B /* Formulize Prototype.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Formulize Prototype.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -110,6 +113,8 @@
 		4493F6AF18086FFC002C636B /* Formulize Prototype */ = {
 			isa = PBXGroup;
 			children = (
+				2549DA3D183F274B00FE7329 /* activeConnection.h */,
+				2549DA3E183F274B00FE7329 /* activeConnection.m */,
 				44CD12BE1836A6EF00B5F539 /* MenuLinksTableViewController.h */,
 				44CD12BF1836A6EF00B5F539 /* MenuLinksTableViewController.m */,
 				44CD12C01836A6EF00B5F539 /* screenWebViewController.h */,
@@ -218,6 +223,7 @@
 				44EBF7CC183608E800238DAB /* Connection.m in Sources */,
 				44CD12C21836A6EF00B5F539 /* MenuLinksTableViewController.m in Sources */,
 				44CD12C31836A6EF00B5F539 /* screenWebViewController.m in Sources */,
+				2549DA3F183F274B00FE7329 /* activeConnection.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

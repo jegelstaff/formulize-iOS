@@ -14,6 +14,4 @@
 @property (strong, nonatomic) NSArray *applicationsData;
 @property (strong, nonatomic) NSArray *menuLinksForApp;
 
-@property (strong, nonatomic) IBOutlet UIButton *sendData;
-
 @end

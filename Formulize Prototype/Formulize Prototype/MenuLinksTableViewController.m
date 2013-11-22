@@ -11,10 +11,7 @@
 @implementation MenuLinksTableViewController
 
 @synthesize MenuLinksText;
-@synthesize menuLinkScreen;
-@synthesize menuLinkID;
-
-@synthesize sendData;
+@synthesize menuLink;
 
 - (void)didReceiveMemoryWarning
 {
@@ -26,10 +23,6 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
-    
-    for(NSDictionary *item in MenuLinksText) {
-        NSLog(@"menuitem: %@", [item objectForKey:@"text"]);
-    }
     
 }
 
@@ -60,14 +53,19 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
+    menuLink = [MenuLinksText objectAtIndex:indexPath.row];
     
-    menuLinkScreen = [[MenuLinksText objectAtIndex:indexPath.row] objectForKey:@"screen"];
-   // NSLog(@"screen: %@",menuLinkScreen);
-    
-    menuLinkID = [[MenuLinksText objectAtIndex:indexPath.row] objectForKey:@"menu_id"];
-   // NSLog(@"menu_id: %@",menuLinkID);
-    
-    [self performSegueWithIdentifier:@"sendScreen" sender:nil];
+    //handle external URLs
+    if(![[menuLink objectForKey:@"url"] isEqualToString:@""] ){
+        NSURL* externalURL = [NSURL URLWithString:[menuLink objectForKey:@"url"]];
+        if (![[UIApplication sharedApplication] openURL:externalURL]){
+            NSLog(@"%@%@",@"Failed to open url:",[externalURL description]);
+        }
+    }
+    //show screen in next webView
+    else{
+        [self performSegueWithIdentifier:@"sendScreen" sender:nil];
+    }
 }
 
 
@@ -80,9 +78,8 @@
         screenWebViewController *nextView = [segue destinationViewController];
         
         // Set the data to be sent
-        
-        [nextView setScreen:menuLinkScreen];
-        [nextView setMenuID:menuLinkID];
+        [nextView setMenuLink:menuLink];
+
     }
 }
 

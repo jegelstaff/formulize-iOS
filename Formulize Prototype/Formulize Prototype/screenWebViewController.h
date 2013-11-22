@@ -14,8 +14,7 @@
 
 }
 @property(nonatomic, retain)IBOutlet UIWebView* myview;
-@property(nonatomic, strong)  NSString *screen;
-@property(nonatomic, strong)  NSString *menuID;
+@property(nonatomic, strong, retain)  NSDictionary *menuLink;
 
 
 @end
