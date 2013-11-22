@@ -1,5 +1,5 @@
 //
-//  ViewController.m
+//  AddConnectionViewController.m
 //  Formulize Prototype
 //
 //  Created by Mary Nelly on 10-11-13.
@@ -13,6 +13,7 @@
 @synthesize urlTextField;
 @synthesize usernameTextField;
 @synthesize passwordTextField;
+@synthesize rememberMe;
 
 
 - (void)didReceiveMemoryWarning
@@ -36,6 +37,7 @@
     [self setUsernameTextField:nil];
     [self setPasswordTextField:nil];
     [self setUrlNameTextField:nil];
+    [self setRememberMe:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -74,6 +76,21 @@
 }
 
 - (IBAction)onoffSwitch:(id)sender {
+    if([rememberMe isOn]){
+        usernameTextField.enabled = YES;
+        passwordTextField.enabled = YES;
+        usernameTextField.backgroundColor = [UIColor whiteColor];
+        passwordTextField.backgroundColor = [UIColor whiteColor];
+
+    }
+    else{
+        usernameTextField.text = @"";
+        passwordTextField.text = @"";
+        usernameTextField.enabled = NO;
+        passwordTextField.enabled = NO;
+        usernameTextField.backgroundColor = [UIColor lightGrayColor];
+        passwordTextField.backgroundColor = [UIColor lightGrayColor];
+    }
 }
 
 - (IBAction)backgroundTouched:(id)sender {
@@ -153,8 +170,7 @@
         }
         
         AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-        [appDelegate initializeDatabase];  //call the initializeDatabase method to reload the connections list
-        
+        [appDelegate initializeDatabase];        
          
        [self.navigationController popToRootViewControllerAnimated:YES]; 
     }

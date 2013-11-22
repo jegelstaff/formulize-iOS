@@ -7,25 +7,23 @@
 //
 
 #import <UIKit/UIKit.h>
-//#import <sqlite3.h>
 #import "Connection.h"
 #import "AppDelegate.h"
 #import "AddConnectionViewController.h"
 #import "ApplicationTableViewController.h"
+#import "EditConnectionViewController.h"
 
 @interface ChooseConnectionViewController : UITableViewController <UITableViewDelegate, UITableViewDataSource,UIAlertViewDelegate>
 {
-    AddConnectionViewController *addView;
     ApplicationTableViewController *applications;
     NSArray *applicationsData;
-    
+    Connection *connect;
 }
 
-//@property (nonatomic, strong) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) NSArray *applicationsData;
 @property (strong, nonatomic) IBOutlet UIButton *Login;
 @property BOOL isLoggedIn;
-@property(nonatomic,retain) AddConnectionViewController *addView;
+@property (nonatomic, retain) Connection *connect;
 
 -(void)validateLogin:(NSString*)url :(NSString*)username :(NSString*)password;
 

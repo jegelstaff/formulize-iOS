@@ -21,6 +21,5 @@
 
 - (void)initializeDatabase;
 - (void)removeConnection:(Connection *)connection;
-//- (Todo *)addConnection:(Connection *)connection;
 
 @end

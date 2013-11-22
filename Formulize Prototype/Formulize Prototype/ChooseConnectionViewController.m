@@ -10,17 +10,15 @@
 
 
 @implementation ChooseConnectionViewController
-
-//@synthesize tableView;
-@synthesize addView;
 @synthesize applicationsData;
 @synthesize Login;
 @synthesize isLoggedIn;
+@synthesize connect;
 
 NSString *connectionURL;
 
 - (void)viewWillAppear:(BOOL)animated {
-    //[self.tableView reloadData];
+    [self.tableView reloadData];
 }
 
 - (void)viewDidLoad
@@ -29,6 +27,11 @@ NSString *connectionURL;
     [super viewDidLoad];
     self.navigationItem.leftBarButtonItem = self.editButtonItem;
   
+}
+
+- (void)viewDidUnload {
+    
+    [super viewDidUnload];
 }
 
 - (void)setEditing:(BOOL)editing animated:(BOOL)animated {
@@ -41,12 +44,6 @@ NSString *connectionURL;
     } else {
         self.navigationItem.rightBarButtonItem.enabled = YES;
     }
-}
-
-
-- (void)viewDidUnload {
-
-    [super viewDidUnload];
 }
 
 #pragma mark - TableView Data Source Methods
@@ -72,6 +69,7 @@ NSString *connectionURL;
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:simpleTableIdentifier];
     }
+    
     Connection *cn = [appDelegate.connections objectAtIndex:indexPath.row];
     cell.textLabel.text = cn.name;
     return cell;
@@ -83,28 +81,43 @@ NSString *connectionURL;
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    Connection *cn = [appDelegate.connections objectAtIndex:indexPath.row];
-    connectionURL = cn.url;
-    NSString *username = cn.username;
-    NSString *password = cn.password;
-    isLoggedIn = false;
-    if(!isLoggedIn){
+    connect = [appDelegate.connections objectAtIndex:indexPath.row];
+    connectionURL = connect.url;
+    NSString *username = connect.username;
+    NSString *password = connect.password;
+    
+    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    
+    if([cell isEditing] == YES) {
+        //call method to push the edit screen
+        [self performSegueWithIdentifier:@"editconnection" sender:nil];
+    }
+    else {
         
-       
-            UIAlertView *loginalert = [[UIAlertView alloc] initWithTitle:@"Login Credentials"
-                                                                 message:nil
-                                                                delegate:self
-                                                       cancelButtonTitle:@"Cancel"
-                                                       otherButtonTitles:@"Login", nil];
-            [loginalert setAlertViewStyle:UIAlertViewStyleLoginAndPasswordInput];
+        isLoggedIn = false;
+        if(!isLoggedIn){
+            if( [username isEqualToString:@""] || [password isEqualToString:@""]){
             
-            UITextField *utextfield = [loginalert textFieldAtIndex:0];
-            utextfield.text = username;
+           
+                UIAlertView *loginalert = [[UIAlertView alloc] initWithTitle:@"Login Credentials"
+                                                                     message:nil
+                                                                    delegate:self
+                                                           cancelButtonTitle:@"Cancel"
+                                                           otherButtonTitles:@"Login", nil];
+                [loginalert setAlertViewStyle:UIAlertViewStyleLoginAndPasswordInput];
+                
+                UITextField *utextfield = [loginalert textFieldAtIndex:0];
+                utextfield.text = username;
+                
+                UITextField *ptextfield = [loginalert textFieldAtIndex:1];
+                ptextfield.text = password;
             
-            UITextField *ptextfield = [loginalert textFieldAtIndex:1];
-            ptextfield.text = password;
-        
-        [loginalert show];
+            [loginalert show];
+            }
+            else{
+                [self validateLogin:connectionURL :username :password];
+            }
+        }
         
     }
 
@@ -199,6 +212,7 @@ NSString *connectionURL;
 	}	
 }
 
+
 //pass application data to menuLinks screen
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
@@ -209,6 +223,15 @@ NSString *connectionURL;
         
         [nextView setApplicationsData:applicationsData];
     }
+    if ([[segue identifier] isEqualToString:@"editconnection"]) {
+        
+        // Get destination view
+        EditConnectionViewController *editView = [segue destinationViewController];
+        
+        [editView setConnect:connect];
+        
+    }
+
 }
 
 -(void)validateLogin:(NSString*)url :(NSString*)username :(NSString*)password{

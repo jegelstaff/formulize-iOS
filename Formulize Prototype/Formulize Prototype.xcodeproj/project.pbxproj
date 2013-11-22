@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		254F794418308CB300080B80 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 254F794318308CB300080B80 /* Default@2x.png */; };
 		254F794718308CC700080B80 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 254F794618308CC700080B80 /* Default.png */; };
+		44554791183E548C0067AF11 /* EditConnectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 44554790183E548C0067AF11 /* EditConnectionViewController.m */; };
 		4493F6AA18086FFC002C636B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4493F6A918086FFC002C636B /* UIKit.framework */; };
 		4493F6AC18086FFC002C636B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4493F6AB18086FFC002C636B /* Foundation.framework */; };
 		4493F6AE18086FFC002C636B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4493F6AD18086FFC002C636B /* CoreGraphics.framework */; };
@@ -31,6 +32,8 @@
 /* Begin PBXFileReference section */
 		254F794318308CB300080B80 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		254F794618308CC700080B80 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		4455478F183E548C0067AF11 /* EditConnectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditConnectionViewController.h; sourceTree = "<group>"; };
+		44554790183E548C0067AF11 /* EditConnectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditConnectionViewController.m; sourceTree = "<group>"; };
 		4493F6A518086FFC002C636B /* Formulize Prototype.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Formulize Prototype.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4493F6A918086FFC002C636B /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		4493F6AB18086FFC002C636B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -119,13 +122,15 @@
 				4493F6BB18086FFC002C636B /* MainStoryboard.storyboard */,
 				4493F6BE18086FFC002C636B /* AddConnectionViewController.h */,
 				4493F6BF18086FFC002C636B /* AddConnectionViewController.m */,
-				4493F6B018086FFC002C636B /* Supporting Files */,
+				4455478F183E548C0067AF11 /* EditConnectionViewController.h */,
+				44554790183E548C0067AF11 /* EditConnectionViewController.m */,
 				44E208DC181ACF2200EE9771 /* ChooseConnectionViewController.h */,
 				44E208DD181ACF2200EE9771 /* ChooseConnectionViewController.m */,
 				44E208DF181AD4B500EE9771 /* ApplicationTableViewController.h */,
 				44E208E0181AD4B500EE9771 /* ApplicationTableViewController.m */,
 				44EBF7CA183608E800238DAB /* Connection.h */,
 				44EBF7CB183608E800238DAB /* Connection.m */,
+				4493F6B018086FFC002C636B /* Supporting Files */,
 			);
 			path = "Formulize Prototype";
 			sourceTree = "<group>";
@@ -218,6 +223,7 @@
 				44EBF7CC183608E800238DAB /* Connection.m in Sources */,
 				44CD12C21836A6EF00B5F539 /* MenuLinksTableViewController.m in Sources */,
 				44CD12C31836A6EF00B5F539 /* screenWebViewController.m in Sources */,
+				44554791183E548C0067AF11 /* EditConnectionViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
