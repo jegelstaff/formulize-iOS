@@ -75,16 +75,6 @@ NSString *connectionURL;
 	}	
 }
 
-//pass application data to menuLinks screen
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    if ([[segue identifier] isEqualToString:@"sendAppData"]) {
-        
-        // Get destination view
-        ApplicationTableViewController *nextView = [segue destinationViewController];
-        [nextView setApplicationsData:applicationsData];
-    }
-}
 
 
 //-----------------------------------------------------------------------
@@ -374,7 +364,7 @@ NSString *connectionURL;
     return YES;
 }
 
-//pass connection data to edit screen
+//pass data between screens
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([[segue identifier] isEqualToString:@"editconnection"]) {
@@ -384,6 +374,12 @@ NSString *connectionURL;
         
         [editView setConnect:connect];
         
+    }
+    if ([[segue identifier] isEqualToString:@"sendAppData"]) {
+        
+        // Get destination view
+        ApplicationTableViewController *nextView = [segue destinationViewController];
+        [nextView setApplicationsData:applicationsData];
     }
 }
 
