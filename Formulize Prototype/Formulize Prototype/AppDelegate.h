@@ -18,6 +18,7 @@
 @property (strong, nonatomic) UIWindow *window;
 
 @property (nonatomic, retain) NSMutableArray *connections;
+@property (nonatomic, retain) NSMutableArray *activeConnections;
 
 - (void)initializeDatabase;
 - (void)removeConnection:(Connection *)connection;

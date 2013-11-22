@@ -18,12 +18,16 @@
 
 @synthesize window = _window;
 @synthesize connections;
+@synthesize activeConnections;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
     [self createEditableCopyOfDatabaseIfNeeded];
 	[self initializeDatabase];
+    
+    //active logins are disconnected after the app closes 
+    activeConnections=[[NSMutableArray alloc] init];
     return YES;
     
 }
@@ -129,6 +133,7 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application
 {
+    activeConnections = nil;
     /*
      Called when the application is about to terminate.
      Save data if appropriate.
