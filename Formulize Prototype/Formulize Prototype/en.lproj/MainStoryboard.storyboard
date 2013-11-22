@@ -474,15 +474,9 @@
         </class>
         <class className="ApplicationTableViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/ApplicationTableViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="sendData" candidateClass="UIButton"/>
-            </relationships>
         </class>
         <class className="ChooseConnectionViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/ChooseConnectionViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="Login" candidateClass="UIButton"/>
-            </relationships>
         </class>
         <class className="EditConnectionViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/EditConnectionViewController.h"/>
@@ -496,9 +490,6 @@
         </class>
         <class className="MenuLinksTableViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/MenuLinksTableViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="sendData" candidateClass="UIButton"/>
-            </relationships>
         </class>
         <class className="screenWebViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/screenWebViewController.h"/>
