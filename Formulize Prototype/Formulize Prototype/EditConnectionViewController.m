@@ -13,6 +13,7 @@
 @synthesize urlTextField;
 @synthesize usernameTextField;
 @synthesize passwordTextField;
+@synthesize rememberMe;
 @synthesize connect;
 
 - (void)didReceiveMemoryWarning
@@ -28,8 +29,20 @@
     [super viewDidLoad];
     urlNameTextField.text = connect.name;
     urlTextField.text = connect.url;
-    usernameTextField.text = connect.username;
-    passwordTextField.text = connect.password;
+    if ([connect.username isEqualToString:@""] || [connect.password isEqualToString:@""])
+    {
+        usernameTextField.enabled = NO;
+        passwordTextField.enabled = NO;
+        usernameTextField.backgroundColor = [UIColor lightGrayColor];
+        passwordTextField.backgroundColor = [UIColor lightGrayColor];
+        
+        [rememberMe setOn:NO];
+    }
+    else
+    {
+        usernameTextField.text = connect.username;
+        passwordTextField.text = connect.password;
+    }    
 }
 
 - (void)viewDidUnload
@@ -39,6 +52,7 @@
     [self setUsernameTextField:nil];
     [self setPasswordTextField:nil];
     [self setUrlNameTextField:nil];
+    [self setRememberMe:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -68,6 +82,24 @@
 {
     // Return YES for supported orientations
     return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
+}
+
+- (IBAction)onoffSwitch:(id)sender {
+    if([rememberMe isOn]){
+        usernameTextField.enabled = YES;
+        passwordTextField.enabled = YES;
+        usernameTextField.backgroundColor = [UIColor whiteColor];
+        passwordTextField.backgroundColor = [UIColor whiteColor];
+        
+    }
+    else{
+        usernameTextField.text = @"";
+        passwordTextField.text = @"";
+        usernameTextField.enabled = NO;
+        passwordTextField.enabled = NO;
+        usernameTextField.backgroundColor = [UIColor lightGrayColor];
+        passwordTextField.backgroundColor = [UIColor lightGrayColor];
+    }
 }
 
 - (IBAction)updateConnection:(id)sender {

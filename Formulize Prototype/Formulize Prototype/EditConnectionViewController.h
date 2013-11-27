@@ -16,6 +16,7 @@
     UITextField *urlTextField;
     UITextField *usernameTextField;
     UITextField *passwordTextField;
+    UISwitch *rememberMe;
     Connection *connect;
     sqlite3 *formulizeDB;
     NSString *databasePath;
@@ -30,7 +31,11 @@
 
 @property (strong, nonatomic) IBOutlet UITextField *passwordTextField; 
 
+@property (strong, nonatomic) IBOutlet UISwitch *rememberMe;
+
 @property (strong, nonatomic) Connection *connect;
+
+- (IBAction)onoffSwitch:(id)sender;
 
 - (IBAction)updateConnection:(id)sender;
 
