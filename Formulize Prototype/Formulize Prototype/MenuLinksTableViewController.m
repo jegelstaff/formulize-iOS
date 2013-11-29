@@ -12,6 +12,7 @@
 
 @synthesize MenuLinksText;
 @synthesize menuLink;
+@synthesize myURL;
 
 - (void)didReceiveMemoryWarning
 {
@@ -79,8 +80,13 @@
         
         // Set the data to be sent
         [nextView setMenuLink:menuLink];
-
+		[nextView setMyURL:myURL];
     }
+}
+
+- (IBAction) logout{
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    [appDelegate logoutFromURL:myURL];
 }
 
 @end

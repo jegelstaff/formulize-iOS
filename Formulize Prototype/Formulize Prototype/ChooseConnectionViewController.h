@@ -7,28 +7,25 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "Connection.h"
-#import "activeConnection.h"
 #import "AppDelegate.h"
-#import "AddConnectionViewController.h"
 #import "ApplicationTableViewController.h"
 #import "EditConnectionViewController.h"
 
 @interface ChooseConnectionViewController : UITableViewController <UITableViewDelegate, UITableViewDataSource,UIAlertViewDelegate>
 {
-    ApplicationTableViewController *applications;
+    AppDelegate *appDelegate;
     NSArray* applicationsData;
-    activeConnection* CurrentConnection;
     Connection *connect;
 }
 
 @property (strong, nonatomic) NSArray *applicationsData;
-@property (nonatomic, retain) Connection *connect;
 @property(nonatomic,retain) NSMutableData *appData;
+@property (nonatomic, retain) Connection *connect;
 @property(nonatomic,retain) activeConnection* CurrentConnection;
 
 -(void)validateLogin:(NSString*)url :(NSString*)username :(NSString*)password;
 -(BOOL)validateURL:(NSString*)url;
--(void)getApplicationList;
+-(void)hasValidSession:(NSString*)url;
+-(void)getApplicationList:(NSString*)url;
 
 @end

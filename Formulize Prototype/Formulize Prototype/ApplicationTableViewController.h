@@ -8,10 +8,14 @@
 
 #import <UIKit/UIKit.h>
 #import "MenuLinksTableViewController.h"
+#import "AppDelegate.h"
 
 @interface ApplicationTableViewController : UITableViewController<UITableViewDelegate,UITableViewDataSource>
 
 @property (strong, nonatomic) NSArray *applicationsData;
 @property (strong, nonatomic) NSArray *menuLinksForApp;
+@property(nonatomic, strong, retain)  NSString *myURL;
+
+- (IBAction) logout;
 
 @end

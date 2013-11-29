@@ -104,14 +104,57 @@
 
 - (IBAction)updateConnection:(id)sender {
     
-    self.connect.name = urlNameTextField.text;
-    self.connect.url = urlTextField.text;
-    self.connect.username = usernameTextField.text;
-    self.connect.password = passwordTextField.text;
+    NSString * validateURL = urlTextField.text;
+    // Remove / from URL if necessary
+    if([ validateURL hasSuffix:@"/"]){
+        validateURL = [ validateURL substringToIndex:[ urlTextField.text length] - 1];
+    }
     
-    [self updateConnectionInDatabase:nil];
+    // Append http:// to URL if necessary
+    if(![ validateURL hasPrefix:@"http://"] && ![ validateURL hasPrefix:@"https://"]){
+        validateURL = [@"http://" stringByAppendingString: validateURL];
+    }
     
-    [self.navigationController popToRootViewControllerAnimated:YES];     
+    ChooseConnectionViewController *connectionView = [[ChooseConnectionViewController alloc] init];
+    // User can decide to leave username or password blank.
+    // Need to make sure url is not blank
+    
+    if([urlTextField.text isEqualToString:@""]){
+        NSLog(@"urlTextField is empty" );
+        
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Required information is missing" 
+                                                        message:@"Please enter a URL" 
+                                                       delegate:nil 
+                                              cancelButtonTitle:@"OK"
+                                              otherButtonTitles:nil];
+        [alert show];
+    }
+    else if(![connectionView validateURL:validateURL]){
+        NSLog(@"invalid formuize url" );
+        
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Invalid Formuize URL" 
+                                                        message:@"Please enter a valid Formulize URL" 
+                                                       delegate:nil 
+                                              cancelButtonTitle:@"OK"
+                                              otherButtonTitles:nil];
+        [alert show];
+    }
+    else{
+        
+        if([urlNameTextField.text isEqualToString:@""]){
+            urlNameTextField.text = urlTextField.text;
+        }
+        
+        urlTextField.text = validateURL;
+        self.connect.name = urlNameTextField.text;
+        self.connect.url = urlTextField.text;
+        self.connect.username = usernameTextField.text;
+        self.connect.password = passwordTextField.text;
+        
+        [self updateConnectionInDatabase:nil];
+        
+        [self.navigationController popToRootViewControllerAnimated:YES];   
+    }
     
 }
 

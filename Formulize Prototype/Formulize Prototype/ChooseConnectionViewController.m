@@ -15,9 +15,6 @@
 @synthesize appData;
 @synthesize CurrentConnection;
 
-NSString *connectionURL;
-
-
 
 - (void)viewWillAppear:(BOOL)animated {
     [self.tableView reloadData];
@@ -27,8 +24,8 @@ NSString *connectionURL;
 {
  
     [super viewDidLoad];
-    //[appData setData:nil];
-       self.navigationItem.leftBarButtonItem = self.editButtonItem;
+    appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    self.navigationItem.leftBarButtonItem = self.editButtonItem;
   
 }
 
@@ -65,7 +62,6 @@ NSString *connectionURL;
 - (void)tableView:(UITableView *)tableView commitEditingStyle:
 (UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
 	
-	AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
 	Connection *cn = (Connection *)[appDelegate.connections objectAtIndex:indexPath.row];
 	
 	if (editingStyle == UITableViewCellEditingStyleDelete) {
@@ -99,7 +95,6 @@ NSString *connectionURL;
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     return appDelegate.connections.count;
 }
 
@@ -113,17 +108,24 @@ NSString *connectionURL;
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *simpleTableIdentifier = @"connectCell";
-    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
-    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MyIdentifier"];
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:simpleTableIdentifier];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"MyIdentifier"];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     
     Connection *cn = [appDelegate.connections objectAtIndex:indexPath.row];
     cell.textLabel.text = cn.name;
+    NSString *username = @"**username**";
+    if(![cn.username isEqualToString:@""]){
+        username = cn.username;
+    }
+    cell.detailTextLabel.text = username;
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"Icon114" ofType:@"png"];
+    UIImage *theImage = [UIImage imageWithContentsOfFile:path];
+    cell.imageView.image = theImage;
+    
     return cell;
 
 }
@@ -139,26 +141,30 @@ NSString *connectionURL;
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
 
     connect = [appDelegate.connections objectAtIndex:indexPath.row];
-    connectionURL = connect.url;
-    
-    if([connectionURL rangeOfString:@"http://"].location == NSNotFound ){
-        connectionURL = [@"http://" stringByAppendingString:connectionURL];
-    }
     
     NSString *username = connect.username;
     NSString *password = connect.password;
     
-    CurrentConnection = [activeConnection alloc] ;
-    CurrentConnection.connectionPK = connect.primaryKey;
+    CurrentConnection = [[activeConnection alloc] init] ;
+    CurrentConnection.pKey = connect.primaryKey;
+    CurrentConnection.url = connect.url;
+    
     BOOL isLoggedIn = false;
     
+    int countLoggedIn = 0;
     for (activeConnection* item in appDelegate.activeConnections){
-        if(item.connectionPK == connect.primaryKey){
+        if(item.pKey == connect.primaryKey){
             isLoggedIn= true;
         }
+        if([item.url isEqualToString:connect.url]){
+            countLoggedIn++;
+        }
+    }
+    
+    if(!isLoggedIn && countLoggedIn>0){
+        CurrentConnection.otherUserIsLoggedIn = YES; 
     }
     
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
@@ -171,7 +177,7 @@ NSString *connectionURL;
         
         if(!isLoggedIn){
             
-            if([self validateURL:connectionURL]){
+            if([self validateURL:connect.url]){
                 if([username isEqualToString:@""] || [password isEqualToString:@""]){
                        
                 UIAlertView *loginalert = [[UIAlertView alloc] initWithTitle:@"Login Credentials"
@@ -187,10 +193,12 @@ NSString *connectionURL;
                 UITextField *ptextfield = [loginalert textFieldAtIndex:1];
                 ptextfield.text = password;
             
-            [loginalert show];
+            	[loginalert show];
             }
             else{
-                [self validateLogin:connectionURL :username :password];
+            	CurrentConnection.username = username;
+                CurrentConnection.password = password;
+                [self validateLogin:connect.url :username :password];
             }
         }
 
@@ -204,7 +212,7 @@ NSString *connectionURL;
         }
     }
     else{
-        [self getApplicationList];
+        [self getApplicationList:connect.url];
     }
 }
 
@@ -220,7 +228,7 @@ NSString *connectionURL;
     
     // connection is starting, clear buffer
     NSString * requestURL = [[[connection originalRequest] URL] description];
-    if([requestURL rangeOfString:@"app_list.php"].location != NSNotFound ){
+    if([requestURL hasSuffix:@"app_list.php"] ){
         [self.appData setData:nil];
     }
 }
@@ -243,19 +251,21 @@ NSString *connectionURL;
         
         NSLog(@"logged in...");
         
-        NSHTTPCookieStorage *cookieStorage = [NSHTTPCookieStorage sharedHTTPCookieStorage];
-        NSArray *allCookies = [cookieStorage cookiesForURL:[NSURL URLWithString:connectionURL]];
-        
-        NSHTTPCookie * cookie =[allCookies objectAtIndex:0];
-        CurrentConnection.cookie = cookie;
-
-        CurrentConnection.status = @"connected";
-        
+       // if another user is logged into the same URL
+       // and the current login is successful
+       // replace the previous user with the current user
+       if(CurrentConnection.otherUserIsLoggedIn){
+           for (activeConnection* item in appDelegate.activeConnections){
+               if([item.url isEqualToString:CurrentConnection.url]){
+				   [appDelegate.activeConnections removeObject:item];
+               }
+           }
+       }
+       CurrentConnection.otherUserIsLoggedIn = NO;
         //when a login is successful, an instance of an active object is added to the activeConnectins array
-        AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
         [appDelegate.activeConnections addObject:CurrentConnection];
         
-        [self getApplicationList];
+        [self getApplicationList :CurrentConnection.url];
     }
     else if([urldata isEqualToString:@"0"]){
         
@@ -269,7 +279,7 @@ NSString *connectionURL;
         [alert show];
         
     }
-    else if ([requestURL rangeOfString:@"app_list.php"].location != NSNotFound ){
+      else if ([requestURL hasSuffix:@"app_list.php"] ){
         if(appData == nil){
             appData =(NSMutableData *) data;
         }
@@ -293,13 +303,24 @@ NSString *connectionURL;
     //To determine which request has finished loading
     NSString * requestURL = [[[connection originalRequest] URL] description];
    
-    if([requestURL rangeOfString:@"app_list.php"].location != NSNotFound ){
+    if([requestURL hasSuffix:@"user.php"] ){
+
+        [self hasValidSession:connect.url];
+    }
+    else if([requestURL hasSuffix:@"app_list.php"] ){
         
         NSError *error;
         applicationsData = [NSJSONSerialization JSONObjectWithData:appData options:NSJSONReadingMutableContainers error:&error];
         
         if (error != nil) {
             NSLog(@"Error: %@", [error localizedDescription]);
+            UIAlertView *alert = [[UIAlertView alloc] 
+                                  initWithTitle:@"Error getting Data" 
+                                  message:@"Please try again" 
+                                  delegate:nil 
+                                  cancelButtonTitle:@"OK"
+                                  otherButtonTitles:nil];
+            [alert show];
             
         }else {
 
@@ -333,8 +354,12 @@ NSString *connectionURL;
         NSString *uinputText = [[alertView textFieldAtIndex:0] text];
         NSString *pinputText = [[alertView textFieldAtIndex:1] text];
         
-        if (buttonIndex == 1){    
-            [self validateLogin:connectionURL :uinputText :pinputText];
+        if (buttonIndex == 1){  
+        
+        	CurrentConnection.username = uinputText;
+            CurrentConnection.password = pinputText;
+              
+            [self validateLogin:connect.url :uinputText :pinputText];
          }
     }
 }
@@ -380,6 +405,7 @@ NSString *connectionURL;
         // Get destination view
         ApplicationTableViewController *nextView = [segue destinationViewController];
         [nextView setApplicationsData:applicationsData];
+        [nextView setMyURL:connect.url];
     }
 }
 
@@ -434,68 +460,47 @@ NSString *connectionURL;
     [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
     [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
     [request setHTTPBody:postData];
-    //[request setCachePolicy:NSURLRequestReloadIgnoringLocalCacheData ];
-    //[request setTimeoutInterval:43200];
     
+    NSURLConnection* connection = [NSURLConnection connectionWithRequest:request delegate:self];
+    [connection start];
     
-    //check cookies before request
-    
-    NSHTTPCookieStorage *cookieStorage = [NSHTTPCookieStorage sharedHTTPCookieStorage];
-    NSArray *allCookies = [cookieStorage cookiesForURL:[NSURL URLWithString:connectionURL]];
-    for (NSHTTPCookie *each in allCookies) {
-        NSLog(@"connection cookie:%@", each.value);
-        //[cookieStorage deleteCookie:each];
+    if(!connection){
+        NSLog(@"ERROR Logging in");
     }
-    
 
-    //load login request
-    NSError *error;
-    NSHTTPURLResponse *response;
-    
-    [NSURLConnection  sendSynchronousRequest:request returningResponse:&response error:&error ] ;
-    
-    if(error){ 
-    	
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"ERROR connecting to URL" 
-                                                        message:nil
-                                                       delegate:nil 
-                                              cancelButtonTitle:@"OK"
-                                              otherButtonTitles:nil];
-        [alert show];
-    }
-    else{
-        
-        //check for cookies in domain
-        allCookies =[ cookieStorage cookiesForURL:[NSURL URLWithString:@"http://formulize.dev.freeform.ca"]];
-        NSLog(@"Connecting...");
-        
-        if ( allCookies.count > 0) {
-            
-            //new request to check if user is logged in
-            
-            NSString *check_login_url_str = [NSString stringWithFormat:@"%@/isUserLoggedIn.php",connectionURL];
-
-            NSURL *check_login_url=[NSURL URLWithString:check_login_url_str];
-        
-            request = [NSURLRequest requestWithURL:check_login_url];
-            NSURLConnection* connection = [[NSURLConnection alloc] initWithRequest:request delegate:self startImmediately:YES]; 
-            
-            if(!connection){
-                NSLog(@"error logging in...");
-            }
-            
-            }//end if(cookies>0)
-    }//end if(error)
 }
 
 //-----------------------------------------------------------------------
 //
-// validateLogin:url :username :password
+// hasValidSession: (NSString *) url
+// check if user has a valid session in URL
 //
 //
--(void)getApplicationList{
+-(void)hasValidSession: (NSString *) url{
     
-    NSString* app_list_url_str = [NSString stringWithFormat:@"%@/app_list.php", connectionURL];
+    //new request to check if user is logged in
+    NSString *check_login_url_str = [NSString stringWithFormat:@"%@/isUserLoggedIn.php",url];
+
+    NSURL *check_login_url=[NSURL URLWithString:check_login_url_str];
+
+    NSURLRequest *request = [NSURLRequest requestWithURL:check_login_url];
+    NSURLConnection* connection = [NSURLConnection connectionWithRequest:request delegate:self];
+    [connection start];
+    
+    if(!connection){
+        NSLog(@"ERROR checking Valid Login...");
+    }
+
+}
+
+//-----------------------------------------------------------------------
+//
+// getApplicationList: (NSString *) url
+//
+//
+-(void)getApplicationList: (NSString *) url{
+    
+    NSString* app_list_url_str = [NSString stringWithFormat:@"%@/app_list.php", url];
     NSURL *app_list_url =[NSURL URLWithString:app_list_url_str];
     
     NSURLRequest* request = [NSURLRequest requestWithURL:app_list_url];

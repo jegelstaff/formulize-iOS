@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <sqlite3.h>
 #import "Connection.h"
+#import "ChooseConnectionViewController.h"
 
 @interface EditConnectionViewController : UIViewController <UITextFieldDelegate>
 {

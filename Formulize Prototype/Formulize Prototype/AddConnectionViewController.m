@@ -102,6 +102,18 @@
 
 - (IBAction)saveConnection:(id)sender {
     
+    NSString * validateURL = urlTextField.text;
+    // Remove / from URL if necessary
+    if([ validateURL hasSuffix:@"/"]){
+        validateURL = [ validateURL substringToIndex:[ urlTextField.text length] - 1];
+    }
+
+    // Append http:// to URL if necessary
+    if(![ validateURL hasPrefix:@"http://"] && ![ validateURL hasPrefix:@"https://"]){
+        validateURL = [@"http://" stringByAppendingString: validateURL];
+    }
+    
+    ChooseConnectionViewController *connectionView = [[ChooseConnectionViewController alloc] init];
     // User can decide to leave username or password blank.
     // Need to make sure url is not blank
     
@@ -113,6 +125,16 @@
                                delegate:nil 
                       cancelButtonTitle:@"OK"
                       otherButtonTitles:nil];
+        [alert show];
+    }
+    else if(![connectionView validateURL:validateURL]){
+        NSLog(@"invalid formuize url" );
+        
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Invalid Formuize URL" 
+                                                        message:@"Please enter a valid Formulize URL" 
+                                                       delegate:nil 
+                                              cancelButtonTitle:@"OK"
+                                              otherButtonTitles:nil];
         [alert show];
     }
     else{
@@ -141,6 +163,9 @@
             if([urlNameTextField.text isEqualToString:@""]){
                urlNameTextField.text = urlTextField.text;
             }
+            
+            urlTextField.text = validateURL;
+            
             NSString *insertSQL = [NSString stringWithFormat:@"INSERT INTO connections (name, url, username, password)VALUES(\"%@\",\"%@\",\"%@\", \"%@\")",
                                    urlNameTextField.text, urlTextField.text, usernameTextField.text, passwordTextField.text];
             const char *insert_stmt = [insertSQL UTF8String];

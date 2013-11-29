@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="1.0" toolsVersion="1938" systemVersion="11G63" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="mBE-OQ-8Rh">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="1.0" toolsVersion="1938" systemVersion="11G63b" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="mBE-OQ-8Rh">
     <dependencies>
         <development version="4200" defaultVersion="4200" identifier="xcode"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="933"/>
@@ -53,7 +53,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="URL (REQUIRED)" minimumFontSize="17" clearButtonMode="whileEditing" id="vGa-tf-tpB">
-                                <rect key="frame" x="8" y="119" width="234" height="31"/>
+                                <rect key="frame" x="40" y="130" width="234" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" returnKeyType="done"/>
@@ -62,7 +62,7 @@
                                 </connections>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username (OPTIONAL)" minimumFontSize="17" clearButtonMode="whileEditing" id="WPc-Cu-5Kf">
-                                <rect key="frame" x="8" y="186" width="234" height="31"/>
+                                <rect key="frame" x="40" y="196" width="234" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" returnKeyType="done"/>
@@ -71,7 +71,7 @@
                                 </connections>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password (OPTIONAL)" minimumFontSize="17" clearButtonMode="whileEditing" id="urQ-a7-dBC">
-                                <rect key="frame" x="8" y="220" width="234" height="31"/>
+                                <rect key="frame" x="40" y="231" width="234" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" returnKeyType="done" secureTextEntry="YES"/>
@@ -79,13 +79,6 @@
                                     <outlet property="delegate" destination="2" id="zLP-bI-RO7"/>
                                 </connections>
                             </textField>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Formulize" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" id="CEn-6K-JNK">
-                                <rect key="frame" x="106" y="6" width="136" height="40"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="51"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="5n6-sX-NQg">
                                 <rect key="frame" x="0.0" y="-44" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
@@ -96,7 +89,7 @@
                                 </items>
                             </toolbar>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Name (OPTIONAL)" minimumFontSize="17" clearButtonMode="whileEditing" id="AJc-mi-WzL">
-                                <rect key="frame" x="8" y="85" width="234" height="31"/>
+                                <rect key="frame" x="40" y="95" width="234" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" returnKeyType="done"/>
@@ -104,33 +97,33 @@
                                     <outlet property="delegate" destination="2" id="3ek-Le-4hX"/>
                                 </connections>
                             </textField>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="Icon.png" id="tsb-Im-08q">
-                                <rect key="frame" x="0.0" y="0.0" width="65" height="51"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="logo.png" id="tsb-Im-08q">
+                                <rect key="frame" x="38" y="6" width="204" height="59"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="CONNECTION" lineBreakMode="tailTruncation" minimumFontSize="10" id="Zxs-5Q-rL4">
-                                <rect key="frame" x="8" y="59" width="72" height="20"/>
+                                <rect key="frame" x="42" y="70" width="92" height="26"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="LOGIN DETAILS" lineBreakMode="tailTruncation" minimumFontSize="10" id="W2M-8G-lTC">
-                                <rect key="frame" x="8" y="158" width="81" height="20"/>
+                                <rect key="frame" x="40" y="169" width="94" height="26"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <switch opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" id="MRO-wv-EVN">
-                                <rect key="frame" x="163" y="259" width="79" height="27"/>
+                                <rect key="frame" x="194" y="269" width="79" height="27"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <connections>
                                     <action selector="onoffSwitch:" destination="2" eventType="valueChanged" id="brG-HD-k9O"/>
                                 </connections>
                             </switch>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="remember me" lineBreakMode="tailTruncation" minimumFontSize="10" id="mhp-BQ-mt7">
-                                <rect key="frame" x="8" y="262" width="107" height="21"/>
+                                <rect key="frame" x="42" y="273" width="105" height="18"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -169,7 +162,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" clearButtonMode="whileEditing" id="Mb6-Ei-c7H">
-                                <rect key="frame" x="9" y="122" width="234" height="31"/>
+                                <rect key="frame" x="40" y="128" width="234" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" returnKeyType="done"/>
@@ -178,7 +171,7 @@
                                 </connections>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" clearButtonMode="whileEditing" id="LLk-0Z-Fbq">
-                                <rect key="frame" x="9" y="189" width="234" height="31"/>
+                                <rect key="frame" x="40" y="194" width="234" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" returnKeyType="done"/>
@@ -187,7 +180,7 @@
                                 </connections>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" clearButtonMode="whileEditing" id="7F0-aE-Gyh">
-                                <rect key="frame" x="9" y="223" width="234" height="31"/>
+                                <rect key="frame" x="40" y="228" width="234" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" returnKeyType="done" secureTextEntry="YES"/>
@@ -196,7 +189,7 @@
                                 </connections>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" clearButtonMode="whileEditing" id="waq-nj-n55">
-                                <rect key="frame" x="9" y="90" width="234" height="31"/>
+                                <rect key="frame" x="40" y="95" width="234" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" returnKeyType="done"/>
@@ -205,44 +198,37 @@
                                 </connections>
                             </textField>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="CONNECTION" lineBreakMode="tailTruncation" minimumFontSize="10" id="X3Q-TX-t19">
-                                <rect key="frame" x="9" y="62" width="72" height="20"/>
+                                <rect key="frame" x="40" y="70" width="92" height="26"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="LOGIN DETAILS" lineBreakMode="tailTruncation" minimumFontSize="10" id="28r-Yg-cmT">
-                                <rect key="frame" x="9" y="161" width="81" height="20"/>
+                                <rect key="frame" x="40" y="167" width="94" height="26"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="Icon.png" id="H42-qc-7ds">
-                                <rect key="frame" x="0.0" y="0.0" width="65" height="51"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Formulize" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" id="6Q1-dE-Va8">
-                                <rect key="frame" x="92" y="6" width="136" height="40"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="51"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <switch opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" id="dxM-gS-qJR">
-                                <rect key="frame" x="164" y="262" width="79" height="27"/>
+                                <rect key="frame" x="195" y="267" width="79" height="27"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <connections>
                                     <action selector="onoffSwitch:" destination="5ec-Jd-v51" eventType="valueChanged" id="1Oa-GP-4Z7"/>
                                 </connections>
                             </switch>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="remember me" lineBreakMode="tailTruncation" minimumFontSize="10" id="qg7-3u-LIF">
-                                <rect key="frame" x="9" y="265" width="107" height="21"/>
+                                <rect key="frame" x="40" y="271" width="105" height="19"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="logo.png" id="Pec-r9-S2Z">
+                                <rect key="frame" x="40" y="6" width="204" height="59"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <connections>
@@ -294,7 +280,11 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Applications" id="brM-rN-EZf">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="AIb-om-goc"/>
+                        <barButtonItem key="rightBarButtonItem" title="Logout" id="zNJ-QT-EFq">
+                            <connections>
+                                <action selector="logout" destination="MoX-eM-NrW" id="6O0-Wy-yzg"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <segue destination="dN5-e6-57B" kind="push" identifier="sendMenuData" id="wnE-5z-naw"/>
@@ -329,7 +319,13 @@
                             <outlet property="delegate" destination="dN5-e6-57B" id="6NR-qd-xm6"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Menu Links" id="RJK-fX-cUZ"/>
+                    <navigationItem key="navigationItem" title="Menu Links" id="RJK-fX-cUZ">
+                        <barButtonItem key="rightBarButtonItem" title="Logout" id="Qge-64-N3z">
+                            <connections>
+                                <action selector="logout" destination="dN5-e6-57B" id="nRA-DM-bmP"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <segue destination="SeI-LC-O7R" kind="push" identifier="sendScreen" id="QqH-6G-Oaj"/>
                     </connections>
@@ -353,7 +349,13 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="Xsq-Az-9Be"/>
+                    <navigationItem key="navigationItem" id="Xsq-Az-9Be">
+                        <barButtonItem key="rightBarButtonItem" title="Logout" id="Mvh-7w-lj5">
+                            <connections>
+                                <action selector="logout" destination="SeI-LC-O7R" id="bh3-6Z-dfP"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="myview" destination="mzz-zf-vhM" id="nft-f1-uBL"/>
                     </connections>
@@ -380,7 +382,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Icon.png" width="57" height="57"/>
+        <image name="logo.png" width="220" height="63"/>
     </resources>
     <classes>
         <class className="AddConnectionViewController" superclassName="UIViewController">
@@ -398,6 +400,9 @@
         </class>
         <class className="ApplicationTableViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/ApplicationTableViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="logout"/>
+            </relationships>
         </class>
         <class className="ChooseConnectionViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/ChooseConnectionViewController.h"/>
@@ -416,10 +421,14 @@
         </class>
         <class className="MenuLinksTableViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/MenuLinksTableViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="logout"/>
+            </relationships>
         </class>
         <class className="screenWebViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/screenWebViewController.h"/>
             <relationships>
+                <relationship kind="action" name="logout"/>
                 <relationship kind="outlet" name="myview" candidateClass="UIWebView"/>
             </relationships>
         </class>

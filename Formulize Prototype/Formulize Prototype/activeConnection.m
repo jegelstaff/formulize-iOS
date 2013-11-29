@@ -10,8 +10,10 @@
 
 @implementation activeConnection
 
-@synthesize connectionPK;
-@synthesize cookie;
-@synthesize status;
+@synthesize pKey;
+@synthesize url;
+@synthesize username;
+@synthesize password;
+@synthesize otherUserIsLoggedIn;
 
 @end

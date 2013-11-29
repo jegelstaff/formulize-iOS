@@ -10,6 +10,7 @@
 		2549DA3F183F274B00FE7329 /* activeConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 2549DA3E183F274B00FE7329 /* activeConnection.m */; };
 		254F794418308CB300080B80 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 254F794318308CB300080B80 /* Default@2x.png */; };
 		254F794718308CC700080B80 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 254F794618308CC700080B80 /* Default.png */; };
+		2570438918493ED00094465B /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 2570438818493ED00094465B /* logo.png */; };
 		44554791183E548C0067AF11 /* EditConnectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 44554790183E548C0067AF11 /* EditConnectionViewController.m */; };
 		4493F6AA18086FFC002C636B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4493F6A918086FFC002C636B /* UIKit.framework */; };
 		4493F6AC18086FFC002C636B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4493F6AB18086FFC002C636B /* Foundation.framework */; };
@@ -35,6 +36,7 @@
 		2549DA3E183F274B00FE7329 /* activeConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = activeConnection.m; sourceTree = "<group>"; };
 		254F794318308CB300080B80 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		254F794618308CC700080B80 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		2570438818493ED00094465B /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
 		4455478F183E548C0067AF11 /* EditConnectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditConnectionViewController.h; sourceTree = "<group>"; };
 		44554790183E548C0067AF11 /* EditConnectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditConnectionViewController.m; sourceTree = "<group>"; };
 		4493F6A518086FFC002C636B /* Formulize Prototype.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Formulize Prototype.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -89,6 +91,7 @@
 				44DB8E54182C565500F89F96 /* libsqlite3.0.dylib */,
 				4493F6C818087048002C636B /* Icon114.png */,
 				4493F6C618087042002C636B /* Icon.png */,
+				2570438818493ED00094465B /* logo.png */,
 				4493F6AF18086FFC002C636B /* Formulize Prototype */,
 				4493F6A818086FFC002C636B /* Frameworks */,
 				4493F6A618086FFC002C636B /* Products */,
@@ -210,6 +213,7 @@
 				254F794418308CB300080B80 /* Default@2x.png in Resources */,
 				254F794718308CC700080B80 /* Default.png in Resources */,
 				44EBF7CE1836097E00238DAB /* formulizeios.db in Resources */,
+				2570438918493ED00094465B /* logo.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

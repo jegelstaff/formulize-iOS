@@ -7,13 +7,15 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "Connection.h"
+
 
 @interface activeConnection : NSObject
 
-@property (nonatomic) NSInteger connectionPK;
-@property (nonatomic, retain) NSHTTPCookie* cookie;
-@property (nonatomic, retain) NSString* status; 
+@property (nonatomic,assign) NSInteger pKey;
+@property (nonatomic, retain) NSString* url; 
+@property (nonatomic, retain) NSString* username; 
+@property (nonatomic, retain) NSString* password; 
+@property (nonatomic, assign) BOOL otherUserIsLoggedIn; 
 
 
 @end

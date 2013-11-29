@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <sqlite3.h>
 #import "Connection.h"
+#import "activeConnection.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>{
     sqlite3 *database;
@@ -16,11 +17,12 @@
 }
 
 @property (strong, nonatomic) UIWindow *window;
-
 @property (nonatomic, retain) NSMutableArray *connections;
 @property (nonatomic, retain) NSMutableArray *activeConnections;
 
 - (void)initializeDatabase;
 - (void)removeConnection:(Connection *)connection;
+
+- (void)logoutFromURL:(NSString *)url;
 
 @end

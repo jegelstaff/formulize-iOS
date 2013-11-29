@@ -12,56 +12,48 @@
 
 @synthesize myview;
 @synthesize menuLink;
+@synthesize myURL;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-       
-    NSHTTPCookieStorage *cookieStorage = [NSHTTPCookieStorage sharedHTTPCookieStorage];
-    NSArray *allCookies = [cookieStorage cookiesForURL:[NSURL URLWithString:@"http://formulize.dev.freeform.ca"]];
-    for (NSHTTPCookie *each in allCookies) {
-        NSLog(@"webview cookie:%@", each.value);
-    }
-    
-    NSString* screen = [menuLink objectForKey:@"screen"];
-    NSString* menuID = [menuLink objectForKey:@"menu_id"];
-    //NSLog(@"screen: %@ meni id :%@", screen, menuID); 
-    
-    
-   /* 
-    NSString* screen = @"sid=9";
-    NSString* menuID = @"11";
-    
-    NSString *url = [NSString stringWithFormat:@"http://formulize.dev.freeform.ca/mobile/modules/formulize/index.php?%@&menuid=%@",screen, menuID];
-    
-    NSString *postInfo =[[NSString alloc] initWithFormat:@"%@&menuid=%@",screen, menuID];
-    NSURL *load_url=[NSURL URLWithString:url];
-    NSLog(@"%@",postInfo);
-    NSData *postData = [postInfo dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];  
-    NSString *postLength = [NSString stringWithFormat:@"%d", [postData length]];
+     
+    myview.delegate = self;  
    
+    NSString* screen = [menuLink objectForKey:@"screen"];
+    
+    [self setTitle:[menuLink objectForKey:@"text"]];
+    NSString *url = [NSString stringWithFormat:@"%@/modules/formulize/index.php?%@",myURL, screen];
+
     // Create request
-    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
-    [request setURL:load_url];
-    [request setHTTPMethod:@"POST"];
-    [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
-    [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
-    [request setHTTPBody:postData];
-    [request setCachePolicy:NSURLRequestReloadIgnoringLocalCacheData ];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:url]];
     
-    NSError *error;
-    NSHTTPURLResponse *response;
-    
-    NSData *urlData = [NSURLConnection  sendSynchronousRequest:request returningResponse:&response error:&error ] ;
-    
-    if(error){ //case: URL is not found
-        NSLog(@"error %@", [error localizedDescription]);	
-    }
-    
-    NSString *data=[[NSString alloc]initWithData:urlData encoding:NSUTF8StringEncoding];
-    NSLog(@"data: %@", data);
-    [myview loadHTMLString:data baseURL:nil];*/
-    
-    [myview loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://formulize.dev.freeform.ca/mobile"]]];
+    //load request
+    NSLog(@"Loading Screen %@", screen);
+    [myview loadRequest:request];
+
 }
 
+
+- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error{
+    
+    NSLog(@"WebView ERROR: %@", [error localizedDescription]);
+    if([[error localizedDescription] isEqualToString:@"too many HTTP redirects"]){
+        
+        UIAlertView *alert = [[UIAlertView alloc] 
+                  initWithTitle:@"You do not have permission to view this item" 
+                  message:@"Please contact your Formulize webmaster"
+                  delegate:nil 
+                  cancelButtonTitle:@"OK"
+                  otherButtonTitles:nil];
+        [alert show];
+        
+        [self.navigationController popViewControllerAnimated:YES];
+        
+    }
+}
+
+- (IBAction) logout{
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    [appDelegate logoutFromURL:myURL];
+}
 @end

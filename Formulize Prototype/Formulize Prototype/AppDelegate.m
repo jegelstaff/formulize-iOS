@@ -20,6 +20,12 @@
 @synthesize connections;
 @synthesize activeConnections;
 
+
+//-----------------------------------------------------------
+//
+// didFinishLaunchingWithOptions
+//
+//
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
@@ -32,6 +38,14 @@
     
 }
 
+
+//-----------------------------------------------------------
+//
+// - (void)createEditableCopyOfDatabaseIfNeeded
+// If database does not exist, build a path to a database file
+// and create an editable copy of the database
+//
+//
 - (void)createEditableCopyOfDatabaseIfNeeded
 {
     // First, test for existence.
@@ -57,6 +71,13 @@
     
 }
 
+//-----------------------------------------------------------
+//
+// (void)initializeDatabase
+// Retrieve connections data from database
+// and save it into Array connections in appDelegate
+//
+//
 - (void)initializeDatabase
 {
     NSMutableArray *connectionsArray = [[NSMutableArray alloc] init];
@@ -90,6 +111,86 @@
     
 }
 
+//-----------------------------------------------------------
+//
+// logoutFromURL:(NSURL *)url
+// request a logout from the server
+//
+//
+- (void)logoutFromURL:(NSString *)url{
+    
+    NSURL *logout_url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/user.php?op=logout",url]];
+    
+    // Create logout request
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL: logout_url];
+    
+    //load logout request
+    NSURLConnection * connection = [NSURLConnection connectionWithRequest:request delegate:self];
+    [connection start];
+
+}
+
+//-----------------------------------------------------------
+//
+// dismissAlert:(UIAlertView *)alertView
+//Method to dismiss alert view
+//
+//
+-(void)dismissAlert:(UIAlertView *)alertView
+{
+    [alertView dismissWithClickedButtonIndex:0 animated:YES];
+}
+
+//-----------------------------------------------------------------------
+//
+// connection delegate method
+// didReceiveResponse
+//
+//
+- (void) connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
+    
+    NSString * requestURL= [[[connection originalRequest] URL] description];
+    
+    if([requestURL hasSuffix:@"/user.php?op=logout"] ){
+        
+        requestURL=[requestURL stringByReplacingOccurrencesOfString:@"/user.php?op=logout" withString:@""];
+        
+        NSHTTPURLResponse *urlresponse = (NSHTTPURLResponse *) response;
+        int statusCode = [urlresponse statusCode];
+        if (statusCode == 200) {
+            
+            for (activeConnection* item in self.activeConnections){
+                if([item.url isEqualToString:requestURL]){
+                  //  @synchronized(activeConnections){
+                        [activeConnections removeObject:item];
+                    //}
+                    NSLog(@"Successfully removed an active connection");
+                    
+                }
+            }
+            
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Logging Out" message:@"Logged out successfully" delegate:self cancelButtonTitle:nil otherButtonTitles:nil];
+            [alert show];
+            [self performSelector:@selector(dismissAlert:) withObject:alert afterDelay:1.5f];
+            
+        }
+        else{
+            NSLog(@"ERROR logging out");
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Logging Out" message:@"Your session has already expired" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+            [alert show];
+            
+        }
+        UINavigationController *myNavCon = (UINavigationController*)self.window.rootViewController ;
+        [myNavCon popToRootViewControllerAnimated:YES];
+    }
+}
+
+//-----------------------------------------------------------
+//
+// removeConnection:(Connection *)connection
+// delete an item from the list of connections
+//
+//
 -(void)removeConnection:(Connection *)connection {
     
     //Gets the index of the connection to be removed from the connections array
@@ -140,5 +241,6 @@
      See also applicationDidEnterBackground:.
      */
 }
+
 
 @end

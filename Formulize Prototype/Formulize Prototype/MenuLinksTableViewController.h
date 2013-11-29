@@ -8,10 +8,14 @@
 
 #import <UIKit/UIKit.h>
 #import "ScreenWebViewController.h"
+#import "AppDelegate.h"
 
 @interface MenuLinksTableViewController : UITableViewController<UITableViewDelegate,UITableViewDataSource>
 
 @property (strong, nonatomic) NSArray *MenuLinksText;
 @property(nonatomic, strong, retain)  NSDictionary *menuLink;
+@property(nonatomic, strong, retain)  NSString *myURL;
+
+- (IBAction) logout;
 
 @end

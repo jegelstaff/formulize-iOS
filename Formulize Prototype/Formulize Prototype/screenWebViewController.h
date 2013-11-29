@@ -8,13 +8,16 @@
 
 #import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
+#import "AppDelegate.h"
 
-@interface screenWebViewController : UIViewController{
+@interface screenWebViewController : UIViewController <UIWebViewDelegate>{
     UIWebView* myview;
 
 }
 @property(nonatomic, retain)IBOutlet UIWebView* myview;
 @property(nonatomic, strong, retain)  NSDictionary *menuLink;
+@property(nonatomic, strong, retain)  NSString *myURL;
 
+- (IBAction) logout;
 
 @end
