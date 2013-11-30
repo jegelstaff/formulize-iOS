@@ -52,33 +52,6 @@
                         <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="URL (REQUIRED)" minimumFontSize="17" clearButtonMode="whileEditing" id="vGa-tf-tpB">
-                                <rect key="frame" x="40" y="130" width="234" height="31"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" returnKeyType="done"/>
-                                <connections>
-                                    <outlet property="delegate" destination="2" id="1aa-mc-1Sb"/>
-                                </connections>
-                            </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username (OPTIONAL)" minimumFontSize="17" clearButtonMode="whileEditing" id="WPc-Cu-5Kf">
-                                <rect key="frame" x="40" y="196" width="234" height="31"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" returnKeyType="done"/>
-                                <connections>
-                                    <outlet property="delegate" destination="2" id="Ofe-7Q-Tfm"/>
-                                </connections>
-                            </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password (OPTIONAL)" minimumFontSize="17" clearButtonMode="whileEditing" id="urQ-a7-dBC">
-                                <rect key="frame" x="40" y="231" width="234" height="31"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" returnKeyType="done" secureTextEntry="YES"/>
-                                <connections>
-                                    <outlet property="delegate" destination="2" id="zLP-bI-RO7"/>
-                                </connections>
-                            </textField>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="5n6-sX-NQg">
                                 <rect key="frame" x="0.0" y="-44" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
@@ -88,47 +61,80 @@
                                     <barButtonItem systemItem="save" id="VYq-YP-2Jh"/>
                                 </items>
                             </toolbar>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Name (OPTIONAL)" minimumFontSize="17" clearButtonMode="whileEditing" id="AJc-mi-WzL">
-                                <rect key="frame" x="40" y="95" width="234" height="31"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" returnKeyType="done"/>
-                                <connections>
-                                    <outlet property="delegate" destination="2" id="3ek-Le-4hX"/>
-                                </connections>
-                            </textField>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="logo.png" id="tsb-Im-08q">
-                                <rect key="frame" x="38" y="6" width="204" height="59"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="CONNECTION" lineBreakMode="tailTruncation" minimumFontSize="10" id="Zxs-5Q-rL4">
-                                <rect key="frame" x="42" y="70" width="92" height="26"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="LOGIN DETAILS" lineBreakMode="tailTruncation" minimumFontSize="10" id="W2M-8G-lTC">
-                                <rect key="frame" x="40" y="169" width="94" height="26"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <switch opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" id="MRO-wv-EVN">
-                                <rect key="frame" x="194" y="269" width="79" height="27"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <connections>
-                                    <action selector="onoffSwitch:" destination="2" eventType="valueChanged" id="brG-HD-k9O"/>
-                                </connections>
-                            </switch>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="remember me" lineBreakMode="tailTruncation" minimumFontSize="10" id="mhp-BQ-mt7">
-                                <rect key="frame" x="42" y="273" width="105" height="18"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" id="8Il-un-z4Z">
+                                <rect key="frame" x="20" y="0.0" width="280" height="320"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <subviews>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="remember me" lineBreakMode="tailTruncation" minimumFontSize="10" id="mhp-BQ-mt7">
+                                        <rect key="frame" x="20" y="283" width="105" height="18"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="CONNECTION" lineBreakMode="tailTruncation" minimumFontSize="10" id="Zxs-5Q-rL4">
+                                        <rect key="frame" x="20" y="84" width="92" height="26"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="LOGIN DETAILS" lineBreakMode="tailTruncation" minimumFontSize="10" id="W2M-8G-lTC">
+                                        <rect key="frame" x="20" y="181" width="94" height="26"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="URL (REQUIRED)" minimumFontSize="17" clearButtonMode="whileEditing" id="vGa-tf-tpB">
+                                        <rect key="frame" x="20" y="143" width="234" height="31"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" returnKeyType="done"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="2" id="1aa-mc-1Sb"/>
+                                        </connections>
+                                    </textField>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username (OPTIONAL)" minimumFontSize="17" clearButtonMode="whileEditing" id="WPc-Cu-5Kf">
+                                        <rect key="frame" x="20" y="206" width="234" height="31"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" returnKeyType="done"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="2" id="Ofe-7Q-Tfm"/>
+                                        </connections>
+                                    </textField>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Name (OPTIONAL)" minimumFontSize="17" clearButtonMode="whileEditing" id="AJc-mi-WzL">
+                                        <rect key="frame" x="20" y="109" width="234" height="31"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" returnKeyType="done"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="2" id="3ek-Le-4hX"/>
+                                        </connections>
+                                    </textField>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password (OPTIONAL)" minimumFontSize="17" clearButtonMode="whileEditing" id="urQ-a7-dBC">
+                                        <rect key="frame" x="20" y="240" width="234" height="31"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" returnKeyType="done" secureTextEntry="YES"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="2" id="69g-Vm-NVi"/>
+                                        </connections>
+                                    </textField>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="logo.png" id="tsb-Im-08q">
+                                        <rect key="frame" x="20" y="8" width="204" height="59"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </imageView>
+                                    <switch opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" id="MRO-wv-EVN">
+                                        <rect key="frame" x="175" y="278" width="79" height="27"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <connections>
+                                            <action selector="onoffSwitch:" destination="2" eventType="valueChanged" id="brG-HD-k9O"/>
+                                        </connections>
+                                    </switch>
+                                </subviews>
+                            </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <connections>
@@ -143,8 +149,9 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="passwordTextField" destination="urQ-a7-dBC" id="VFg-qu-y9K"/>
-                        <outlet property="rememberMe" destination="MRO-wv-EVN" id="4iu-yc-jAs"/>
+                        <outlet property="passwordTextField" destination="urQ-a7-dBC" id="MBX-oc-38H"/>
+                        <outlet property="rememberMe" destination="MRO-wv-EVN" id="dhb-Pu-hnm"/>
+                        <outlet property="scrollView" destination="8Il-un-z4Z" id="pjF-m8-Tki"/>
                         <outlet property="urlNameTextField" destination="AJc-mi-WzL" id="IBJ-xx-7uh"/>
                         <outlet property="urlTextField" destination="vGa-tf-tpB" id="zXV-W4-STO"/>
                         <outlet property="usernameTextField" destination="WPc-Cu-5Kf" id="tWP-gR-09M"/>
@@ -161,74 +168,83 @@
                         <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" clearButtonMode="whileEditing" id="Mb6-Ei-c7H">
-                                <rect key="frame" x="40" y="128" width="234" height="31"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" returnKeyType="done"/>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" id="BlT-nW-f27">
+                                <rect key="frame" x="20" y="0.0" width="280" height="320"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <subviews>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="remember me" lineBreakMode="tailTruncation" minimumFontSize="10" id="EpU-aC-Woe">
+                                        <rect key="frame" x="20" y="283" width="105" height="18"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="CONNECTION" lineBreakMode="tailTruncation" minimumFontSize="10" id="fgO-f9-F5v">
+                                        <rect key="frame" x="20" y="84" width="92" height="26"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="LOGIN DETAILS" lineBreakMode="tailTruncation" minimumFontSize="10" id="1Bg-yE-C8x">
+                                        <rect key="frame" x="20" y="181" width="94" height="26"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="URL (REQUIRED)" minimumFontSize="17" clearButtonMode="whileEditing" id="3l8-vd-7HS">
+                                        <rect key="frame" x="20" y="143" width="234" height="31"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" returnKeyType="done"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="5ec-Jd-v51" id="jU3-nd-Y79"/>
+                                        </connections>
+                                    </textField>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username (OPTIONAL)" minimumFontSize="17" clearButtonMode="whileEditing" id="LTA-pq-K3H">
+                                        <rect key="frame" x="20" y="206" width="234" height="31"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" returnKeyType="done"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="5ec-Jd-v51" id="gyz-ad-MKp"/>
+                                        </connections>
+                                    </textField>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Name (OPTIONAL)" minimumFontSize="17" clearButtonMode="whileEditing" id="mMY-Xx-7sD">
+                                        <rect key="frame" x="20" y="109" width="234" height="31"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" returnKeyType="done"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="5ec-Jd-v51" id="dvq-ba-yyJ"/>
+                                        </connections>
+                                    </textField>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password (OPTIONAL)" minimumFontSize="17" clearButtonMode="whileEditing" id="GRA-3R-9rl">
+                                        <rect key="frame" x="20" y="240" width="234" height="31"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" returnKeyType="done" secureTextEntry="YES"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="5ec-Jd-v51" id="Ako-VT-gex"/>
+                                        </connections>
+                                    </textField>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="logo.png" id="yjD-O8-eSi">
+                                        <rect key="frame" x="20" y="8" width="204" height="59"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </imageView>
+                                    <switch opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" id="aBQ-C3-wT6">
+                                        <rect key="frame" x="175" y="278" width="79" height="27"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <connections>
+                                            <action selector="onoffSwitch:" destination="5ec-Jd-v51" eventType="valueChanged" id="3ru-kE-ySN"/>
+                                        </connections>
+                                    </switch>
+                                </subviews>
                                 <connections>
-                                    <outlet property="delegate" destination="5ec-Jd-v51" id="ksZ-DO-w1H"/>
+                                    <outlet property="delegate" destination="5ec-Jd-v51" id="yjC-yn-gD2"/>
                                 </connections>
-                            </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" clearButtonMode="whileEditing" id="LLk-0Z-Fbq">
-                                <rect key="frame" x="40" y="194" width="234" height="31"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" returnKeyType="done"/>
-                                <connections>
-                                    <outlet property="delegate" destination="5ec-Jd-v51" id="g2y-1B-N9V"/>
-                                </connections>
-                            </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" clearButtonMode="whileEditing" id="7F0-aE-Gyh">
-                                <rect key="frame" x="40" y="228" width="234" height="31"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" returnKeyType="done" secureTextEntry="YES"/>
-                                <connections>
-                                    <outlet property="delegate" destination="5ec-Jd-v51" id="2Vu-kz-UxG"/>
-                                </connections>
-                            </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" clearButtonMode="whileEditing" id="waq-nj-n55">
-                                <rect key="frame" x="40" y="95" width="234" height="31"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" returnKeyType="done"/>
-                                <connections>
-                                    <outlet property="delegate" destination="5ec-Jd-v51" id="s0o-b3-Sin"/>
-                                </connections>
-                            </textField>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="CONNECTION" lineBreakMode="tailTruncation" minimumFontSize="10" id="X3Q-TX-t19">
-                                <rect key="frame" x="40" y="70" width="92" height="26"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="LOGIN DETAILS" lineBreakMode="tailTruncation" minimumFontSize="10" id="28r-Yg-cmT">
-                                <rect key="frame" x="40" y="167" width="94" height="26"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <switch opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" id="dxM-gS-qJR">
-                                <rect key="frame" x="195" y="267" width="79" height="27"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <connections>
-                                    <action selector="onoffSwitch:" destination="5ec-Jd-v51" eventType="valueChanged" id="1Oa-GP-4Z7"/>
-                                </connections>
-                            </switch>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="remember me" lineBreakMode="tailTruncation" minimumFontSize="10" id="qg7-3u-LIF">
-                                <rect key="frame" x="40" y="271" width="105" height="19"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="logo.png" id="Pec-r9-S2Z">
-                                <rect key="frame" x="40" y="6" width="204" height="59"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
+                            </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <connections>
@@ -243,11 +259,12 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="passwordTextField" destination="7F0-aE-Gyh" id="HDG-fK-TKN"/>
-                        <outlet property="rememberMe" destination="dxM-gS-qJR" id="qE0-KL-cYZ"/>
-                        <outlet property="urlNameTextField" destination="waq-nj-n55" id="RIG-EL-j3D"/>
-                        <outlet property="urlTextField" destination="Mb6-Ei-c7H" id="iPn-1T-4i8"/>
-                        <outlet property="usernameTextField" destination="LLk-0Z-Fbq" id="sgN-fe-IlM"/>
+                        <outlet property="passwordTextField" destination="GRA-3R-9rl" id="VWR-jb-9b1"/>
+                        <outlet property="rememberMe" destination="aBQ-C3-wT6" id="y0c-0R-yRg"/>
+                        <outlet property="scrollView" destination="BlT-nW-f27" id="auV-yx-IX2"/>
+                        <outlet property="urlNameTextField" destination="mMY-Xx-7sD" id="8Sq-yw-fYx"/>
+                        <outlet property="urlTextField" destination="3l8-vd-7HS" id="21l-qk-2nS"/>
+                        <outlet property="usernameTextField" destination="LTA-pq-K3H" id="k8q-Y3-tXL"/>
                     </connections>
                 </viewController>
             </objects>
@@ -393,6 +410,7 @@
                 <relationship kind="action" name="saveConnection:"/>
                 <relationship kind="outlet" name="passwordTextField" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="rememberMe" candidateClass="UISwitch"/>
+                <relationship kind="outlet" name="scrollView" candidateClass="UIScrollView"/>
                 <relationship kind="outlet" name="urlNameTextField" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="urlTextField" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="usernameTextField" candidateClass="UITextField"/>
@@ -414,6 +432,7 @@
                 <relationship kind="action" name="updateConnection:"/>
                 <relationship kind="outlet" name="passwordTextField" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="rememberMe" candidateClass="UISwitch"/>
+                <relationship kind="outlet" name="scrollView" candidateClass="UIScrollView"/>
                 <relationship kind="outlet" name="urlNameTextField" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="urlTextField" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="usernameTextField" candidateClass="UITextField"/>

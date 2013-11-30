@@ -15,6 +15,7 @@
 @synthesize passwordTextField;
 @synthesize rememberMe;
 @synthesize connect;
+@synthesize scrollView;
 
 - (void)didReceiveMemoryWarning
 {
@@ -93,8 +94,6 @@
         
     }
     else{
-        usernameTextField.text = @"";
-        passwordTextField.text = @"";
         usernameTextField.enabled = NO;
         passwordTextField.enabled = NO;
         usernameTextField.backgroundColor = [UIColor lightGrayColor];
@@ -143,6 +142,11 @@
         
         if([urlNameTextField.text isEqualToString:@""]){
             urlNameTextField.text = urlTextField.text;
+        }
+        
+        if(![rememberMe isOn]){
+             usernameTextField.text = @"";
+             passwordTextField.text = @"";
         }
         
         urlTextField.text = validateURL;
@@ -207,6 +211,8 @@
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     [textField resignFirstResponder];
+    scrollView.scrollEnabled = NO;
+    [scrollView setContentOffset:CGPointZero animated:YES];
     return YES;
 }
 
@@ -215,6 +221,18 @@
     [usernameTextField resignFirstResponder];
     [passwordTextField resignFirstResponder];
     [urlNameTextField resignFirstResponder];
+    scrollView.scrollEnabled = NO;
+    [scrollView setContentOffset:CGPointZero animated:YES];
+}
+
+-(void)textFieldDidBeginEditing:(UITextField *)textField{
+    scrollView.scrollEnabled = YES;
+    scrollView.contentSize = CGSizeMake(200, 440);
+    
+    if(textField.frame.origin.y >=  usernameTextField.frame.origin.y){
+        CGPoint scrollPoint = CGPointMake(0, usernameTextField.frame.origin.y-30);
+        [scrollView setContentOffset:scrollPoint animated:YES];
+    }
 }
 
 @end

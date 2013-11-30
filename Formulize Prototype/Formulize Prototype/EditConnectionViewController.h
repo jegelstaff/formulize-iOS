@@ -34,6 +34,8 @@
 
 @property (strong, nonatomic) IBOutlet UISwitch *rememberMe;
 
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
+
 @property (strong, nonatomic) Connection *connect;
 
 - (IBAction)onoffSwitch:(id)sender;

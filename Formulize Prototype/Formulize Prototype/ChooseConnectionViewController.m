@@ -421,10 +421,10 @@
 //
 -(BOOL)validateURL:(NSString*)url{
     
-    NSURL *login_url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/user.php",url]];
+    NSURL *formulize_url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/user.php",url]];
     
-     NSLog(@"checkURL:%@",[login_url description]);
-    NSURLRequest *request = [NSURLRequest requestWithURL:login_url];
+    // NSLog(@"checkURL:%@",[login_url description]);
+    NSURLRequest *request = [NSURLRequest requestWithURL:formulize_url];
 
     NSURLResponse *response = nil;
     NSError *error=nil; 
