@@ -255,16 +255,19 @@
        // and the current login is successful
        // replace the previous user with the current user
        if(CurrentConnection.otherUserIsLoggedIn){
-           for (activeConnection* item in appDelegate.activeConnections){
-               if([item.url isEqualToString:CurrentConnection.url]){
-				   [appDelegate.activeConnections removeObject:item];
+           @synchronized(appDelegate.activeConnections){
+               for (activeConnection* item in appDelegate.activeConnections){
+                   if([item.url isEqualToString:CurrentConnection.url]){
+                       [appDelegate.activeConnections removeObject:item];
+                   }
                }
            }
        }
        CurrentConnection.otherUserIsLoggedIn = NO;
         //when a login is successful, an instance of an active object is added to the activeConnectins array
-        [appDelegate.activeConnections addObject:CurrentConnection];
-        
+         @synchronized(appDelegate.activeConnections){
+             [appDelegate.activeConnections addObject:CurrentConnection];
+         }
         [self getApplicationList :CurrentConnection.url];
     }
     else if([urldata isEqualToString:@"0"]){

@@ -14,6 +14,8 @@
 @interface AppDelegate : UIResponder <UIApplicationDelegate>{
     sqlite3 *database;
     NSMutableArray *connections;
+    NSTimer* timerCheckSessionStatus;
+    float timerIntervalInSeconds;
 }
 
 @property (strong, nonatomic) UIWindow *window;
@@ -24,5 +26,8 @@
 - (void)removeConnection:(Connection *)connection;
 
 - (void)logoutFromURL:(NSString *)url;
+- (void)extendSession: (NSString *) url;
+- (void)keepSessionAlive:(NSTimer *)timer;
+-(void)validateLogin:(NSString*)url :(NSString*)username :(NSString*)password;
 
 @end

@@ -34,6 +34,10 @@
     
     //active logins are disconnected after the app closes 
     activeConnections=[[NSMutableArray alloc] init];
+    
+    //timer to keep sessions alive as long as the application is active
+     NSLog(@"set timer interval...");
+    timerIntervalInSeconds= 30.0;
     return YES;
     
 }
@@ -159,13 +163,15 @@
         int statusCode = [urlresponse statusCode];
         if (statusCode == 200) {
             
-            for (activeConnection* item in self.activeConnections){
-                if([item.url isEqualToString:requestURL]){
-                  //  @synchronized(activeConnections){
-                        [activeConnections removeObject:item];
-                    //}
-                    NSLog(@"Successfully removed an active connection");
-                    
+            @synchronized(activeConnections){
+                for (activeConnection* item in self.activeConnections){
+                    if([item.url isEqualToString:requestURL]){
+                        
+                            [activeConnections removeObject:item];
+                        
+                        NSLog(@"Successfully removed an active connection");
+                        
+                    }
                 }
             }
             
@@ -202,8 +208,128 @@
     [connections removeObject:connection];
 }
 
+
+//-----------------------------------------------------------
+//
+// keepSessionAlive:(NSTimer *)timer
+// extend user's session
+//
+//
+-(void)keepSessionAlive:(NSTimer *)timer{
+    NSLog(@"timer Fired...");
+    @synchronized(activeConnections){
+    for (activeConnection* item in self.activeConnections){
+        [self extendSession: item.url];
+    }
+    }
+}
+
+
+//-----------------------------------------------------------------------
+//
+// connection delegate methods (1)
+// didReceiveData
+//
+//
+- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data{
+    
+    NSString * requestURL = [[[connection originalRequest] URL] description];
+    
+    if([requestURL hasSuffix:@"/isUserLoggedIn.php"] ){
+        
+        requestURL=[requestURL stringByReplacingOccurrencesOfString:@"/isUserLoggedIn.php" withString:@""];
+        NSString* urldata =[[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
+        
+        if([urldata isEqualToString:@"1"]){
+            
+            NSLog(@"Session still valid");
+            
+        }
+        else if([urldata isEqualToString:@"0"]){
+            
+            NSLog(@"Session has expired ...");
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Session has Expired" 
+                                                            message:@"Please sign in again" 
+                                                           delegate:nil 
+                                                  cancelButtonTitle:@"OK"
+                                                  otherButtonTitles:nil];
+            [alert show];
+            [self logoutFromURL:requestURL];
+            
+        }
+    }
+    
+}
+
+
+//-----------------------------------------------------------------------
+//
+// extendSession: (NSString *) url :(id) myDelegate
+// check if user has a valid session in URL
+//
+//
+-(void)extendSession: (NSString *) url{
+    
+    // a request to keep the session alive 
+    // the web server session does expire as long as the device keeps interacting with the server
+    NSString *extendSessionURLstr = [NSString stringWithFormat:@"%@/isUserLoggedIn.php",url];
+    
+    NSURL *extendSessionURL=[NSURL URLWithString:extendSessionURLstr];
+    
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:extendSessionURL];
+    NSURLConnection* connection = [NSURLConnection connectionWithRequest:request delegate:self];
+    [connection start];
+    
+    if(!connection){
+        NSLog(@"ERROR checking Valid Login...");
+    }
+    
+}
+
+//-----------------------------------------------------------------------
+//
+// validateLogin:url :username :password
+//
+//
+-(void)validateLogin:(NSString*)url :(NSString*)username :(NSString*)password{
+    
+    // login data
+    NSString *login =@"login";
+    NSString *postInfo =[[NSString alloc] initWithFormat:@"op=%@&pass=%@&uname=%@",login, password, username];
+    
+    NSURL *login_url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/user.php",url]];
+    NSData *postData = [postInfo dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];  
+    NSString *postLength = [NSString stringWithFormat:@"%d", [postData length]];
+    
+    
+    // Create LOGIN request
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+    [request setURL:login_url];
+    [request setHTTPMethod:@"POST"];
+    [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
+    [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+    [request setHTTPBody:postData];
+    
+    NSURLConnection* connection = [NSURLConnection connectionWithRequest:request delegate:self];
+    [connection start];
+    
+    if(!connection){
+        NSLog(@"ERROR Logging in");
+    }
+    
+}
+
 - (void)applicationWillResignActive:(UIApplication *)application
 {
+    NSLog(@"invalidate timer...");
+    [timerCheckSessionStatus invalidate];
+    timerCheckSessionStatus = nil;
+    /* NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+     [defaults setObject:activeConnections forKey:@"activeConnections"];
+     [defaults synchronize];
+     NSLog(@"Data saved");
+     activeConnections = nil;*/
+    
     /*
      Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
      Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
@@ -227,6 +353,16 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
+    
+    NSLog(@"re-validate timer...");
+    
+    @synchronized(activeConnections){
+        for (activeConnection* item in self.activeConnections){
+            [self validateLogin: item.url :item.username :item.password];
+        }
+    }
+    
+    timerCheckSessionStatus = [NSTimer scheduledTimerWithTimeInterval:timerIntervalInSeconds target:self selector:@selector(keepSessionAlive:) userInfo:nil repeats:YES];
     /*
      Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
      */
@@ -234,7 +370,9 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application
 {
-    activeConnections = nil;
+    //[timerCheckSessionStatus invalidate];
+    //timerCheckSessionStatus = nil;
+    //activeConnections = nil;
     /*
      Called when the application is about to terminate.
      Save data if appropriate.
