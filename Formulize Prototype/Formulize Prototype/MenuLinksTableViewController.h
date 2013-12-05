@@ -11,6 +11,11 @@
 #import "AppDelegate.h"
 
 @interface MenuLinksTableViewController : UITableViewController<UITableViewDelegate,UITableViewDataSource>
+{
+    NSArray *MenuLinksText;
+    NSDictionary *menuLink;
+    NSString *myURL;
+}
 
 @property (strong, nonatomic) NSArray *MenuLinksText;
 @property(nonatomic, strong, retain)  NSDictionary *menuLink;

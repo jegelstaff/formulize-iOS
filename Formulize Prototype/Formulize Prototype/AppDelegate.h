@@ -16,6 +16,7 @@
     NSMutableArray *connections;
     NSTimer* timerCheckSessionStatus;
     float timerIntervalInSeconds;
+    NSMutableArray *activeConnections;
 }
 
 @property (strong, nonatomic) UIWindow *window;

@@ -21,7 +21,6 @@
     Connection *connect;
     sqlite3 *formulizeDB;
     NSString *databasePath;
-
 }
 
 @property (strong, nonatomic) IBOutlet UITextField *urlNameTextField;

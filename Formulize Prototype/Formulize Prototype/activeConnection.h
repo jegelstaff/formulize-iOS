@@ -10,6 +10,13 @@
 
 
 @interface activeConnection : NSObject
+{
+    NSInteger pKey;
+    NSString* url;
+    NSString* username;
+    NSString* password;
+    BOOL otherUserIsLoggedIn;
+}
 
 @property (nonatomic,assign) NSInteger pKey;
 @property (nonatomic, retain) NSString* url; 

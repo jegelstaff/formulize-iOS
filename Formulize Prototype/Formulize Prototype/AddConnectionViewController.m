@@ -133,8 +133,6 @@
     // Need to make sure url is not blank
     
     if([urlTextField.text isEqualToString:@""]){
-        NSLog(@"urlTextField is empty" );
-        
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Required information is missing" 
                                 message:@"Please enter a URL" 
                                delegate:nil 
@@ -143,8 +141,6 @@
         [alert show];
     }
     else if(![connectionView validateURL:validateURL]){
-        NSLog(@"invalid formuize url" );
-        
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Invalid Formuize URL" 
                                                         message:@"Please enter a valid Formulize URL" 
                                                        delegate:nil 
@@ -206,8 +202,6 @@
                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:@"Unable to add connection!" delegate:self cancelButtonTitle:nil otherButtonTitles:nil];
                 [alert show];
                 [self performSelector:@selector(dismissAlert:) withObject:alert afterDelay:1.0f];
-                
-                NSLog(@"Failed to add connnection");
             }
             sqlite3_finalize(statement);
             sqlite3_close(formulizeDB);

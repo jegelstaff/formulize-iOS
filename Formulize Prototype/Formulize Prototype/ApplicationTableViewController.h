@@ -11,6 +11,11 @@
 #import "AppDelegate.h"
 
 @interface ApplicationTableViewController : UITableViewController<UITableViewDelegate,UITableViewDataSource>
+{
+    NSArray *applicationsData;
+    NSArray *menuLinksForApp;
+    NSString *myURL;
+}
 
 @property (strong, nonatomic) NSArray *applicationsData;
 @property (strong, nonatomic) NSArray *menuLinksForApp;
