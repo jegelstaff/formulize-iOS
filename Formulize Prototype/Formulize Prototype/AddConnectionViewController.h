@@ -37,7 +37,7 @@
 
 - (IBAction)onoffSwitch:(id)sender;
 
-- (IBAction)backgroundTouched:(id)sender;
+- (void)backgroundTouched;
 
 - (IBAction)saveConnection:(id)sender;
 

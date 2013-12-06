@@ -37,10 +37,11 @@
 
 //-----------------------------------------------------------------------
 //
-//setEditing
+// setEditing
 //
 //
 - (void)setEditing:(BOOL)editing animated:(BOOL)animated {
+    
     // Updates the appearance of the Edit|Done button as necessary.
     [super setEditing:editing animated:animated];
     [self.tableView setEditing:editing animated:YES];
@@ -66,8 +67,13 @@
 	
 	if (editingStyle == UITableViewCellEditingStyleDelete) {
 		[appDelegate removeConnection:cn];
+        
+        // if connection is active, remove from active connection
+        [appDelegate removeActiveConnection:cn.url];
+        
 		// Delete the row from the data source
 		[tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:YES];
+        
 	}	
 }
 
@@ -121,11 +127,19 @@
     if(![cn.username isEqualToString:@""]){
         username = cn.username;
     }
+    
     cell.detailTextLabel.text = username;
-    NSString *path = [[NSBundle mainBundle] pathForResource:@"Icon114" ofType:@"png"];
+    
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"notLoggedInIcon" ofType:@"png"];
+   @synchronized(appDelegate.activeConnections){
+    for (activeConnection * item in appDelegate.activeConnections){
+        if(item.pKey == cn.primaryKey){
+            path = [[NSBundle mainBundle] pathForResource:@"Icon114" ofType:@"png"];
+        }
+    }
+   }
     UIImage *theImage = [UIImage imageWithContentsOfFile:path];
     cell.imageView.image = theImage;
-    
     return cell;
 
 }
@@ -142,17 +156,19 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
 
+    //get info of the selected connection
     connect = [appDelegate.connections objectAtIndex:indexPath.row];
     
     NSString *username = connect.username;
     NSString *password = connect.password;
     
+    //create an activeConnection object
     CurrentConnection = [[activeConnection alloc] init] ;
     CurrentConnection.pKey = connect.primaryKey;
     CurrentConnection.url = connect.url;
     
+    //check if connection is already active
     BOOL isLoggedIn = false;
-    
     int countLoggedIn = 0;
     for (activeConnection* item in appDelegate.activeConnections){
         if(item.pKey == connect.primaryKey){
@@ -163,6 +179,7 @@
         }
     }
     
+    //check if URL has an active connection 
     if(!isLoggedIn && countLoggedIn>0){
         CurrentConnection.otherUserIsLoggedIn = YES; 
     }
@@ -174,47 +191,52 @@
         [self performSegueWithIdentifier:@"editconnection" sender:nil];
     }
     else {
-        
+        //case: user is not logged in
         if(!isLoggedIn){
-            
+            //case: user is not logged in and URL is valid
             if([self validateURL:connect.url]){
+                
+                //case: user credentials are not saved
                 if([username isEqualToString:@""] || [password isEqualToString:@""]){
                        
-                UIAlertView *loginalert = [[UIAlertView alloc] initWithTitle:@"Login Credentials"
-                                                                     message:nil
-                                                                    delegate:self
-                                                           cancelButtonTitle:@"Cancel"
-                                                           otherButtonTitles:@"Login", nil];
-                [loginalert setAlertViewStyle:UIAlertViewStyleLoginAndPasswordInput];
+                    UIAlertView *loginalert = [[UIAlertView alloc] initWithTitle:@"Login Credentials"
+                                                                         message:nil
+                                                                        delegate:self
+                                                               cancelButtonTitle:@"Cancel"
+                                                               otherButtonTitles:@"Login", nil];
+                    [loginalert setAlertViewStyle:UIAlertViewStyleLoginAndPasswordInput];
+                    
+                    UITextField *utextfield = [loginalert textFieldAtIndex:0];
+                    utextfield.text = username;
+                    
+                    UITextField *ptextfield = [loginalert textFieldAtIndex:1];
+                    ptextfield.text = password;
                 
-                UITextField *utextfield = [loginalert textFieldAtIndex:0];
-                utextfield.text = username;
-                
-                UITextField *ptextfield = [loginalert textFieldAtIndex:1];
-                ptextfield.text = password;
-            
-            	[loginalert show];
+                    [loginalert show];
+                }
+                //case: user credentials are saved
+                // attempt to login
+                else{
+                    CurrentConnection.username = username;
+                    CurrentConnection.password = password;
+                    [self validateLogin:connect.url :username :password];
+                }
             }
+            //case: user is not logged in and URL is not valid
             else{
-            	CurrentConnection.username = username;
-                CurrentConnection.password = password;
-                [self validateLogin:connect.url :username :password];
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"URL cannot be found" 
+                                message:@"Please enter a valid URL" 
+                                delegate:nil 
+                                  cancelButtonTitle:@"OK"
+                                  otherButtonTitles:nil];
+                [alert show];
             }
         }
-
+        //case: user is logged in
         else{
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"URL cannot be found" 
-                            message:@"Please enter a valid URL" 
-                            delegate:nil 
-                              cancelButtonTitle:@"OK"
-                              otherButtonTitles:nil];
-            [alert show];
+            [self getApplicationList:connect.url];
         }
     }
-    else{
-        [self getApplicationList:connect.url];
-    }
-}
 
 }
 
@@ -229,7 +251,7 @@
     // connection is starting, clear buffer
     NSString * requestURL = [[[connection originalRequest] URL] description];
     if([requestURL hasSuffix:@"app_list.php"] ){
-        [self.appData setData:nil];
+        [self.appData setLength:0];
     }
 }
 
@@ -243,51 +265,43 @@
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data{
     
     NSString * requestURL = [[[connection originalRequest] URL] description];
-    
     NSString* urldata =[[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
-    // NSLog(@"data: %@", urldata);
     
+    //case: user logged in successfully
     if([urldata isEqualToString:@"1"]){
         
-        NSLog(@"logged in...");
-        
-       // if another user is logged into the same URL
-       // and the current login is successful
+       // if another user is logged into the same URL and the current login is successful
        // replace the previous user with the current user
        if(CurrentConnection.otherUserIsLoggedIn){
-           @synchronized(appDelegate.activeConnections){
-               for (activeConnection* item in appDelegate.activeConnections){
-                   if([item.url isEqualToString:CurrentConnection.url]){
-                       [appDelegate.activeConnections removeObject:item];
-                   }
-               }
-           }
+           [appDelegate removeActiveConnection:CurrentConnection.url];
        }
        CurrentConnection.otherUserIsLoggedIn = NO;
+        
         //when a login is successful, an instance of an active object is added to the activeConnectins array
          @synchronized(appDelegate.activeConnections){
              [appDelegate.activeConnections addObject:CurrentConnection];
          }
         [self getApplicationList :CurrentConnection.url];
     }
+     //case: user login failed
     else if([urldata isEqualToString:@"0"]){
         
-        NSLog(@"NOT logged in...");
         CurrentConnection = nil;
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Invalid login" 
-                                                        message:@"Incorrect username or password" 
-                                                       delegate:nil 
-                                              cancelButtonTitle:@"OK"
-                                              otherButtonTitles:nil];
+                            message:@"Incorrect username or password" 
+                           delegate:nil 
+                  cancelButtonTitle:@"OK"
+                  otherButtonTitles:nil];
         [alert show];
         
     }
-      else if ([requestURL hasSuffix:@"app_list.php"] ){
+     //case: recieved application list data 
+    else if ([requestURL hasSuffix:@"app_list.php"] ){
         if(appData == nil){
-            appData =(NSMutableData *) data;
+            appData = [NSMutableData dataWithData:data];
         }
         else{
-            [appData appendData:(NSMutableData *)data];
+            [appData appendData:data];
         }
         
     }
@@ -306,10 +320,14 @@
     //To determine which request has finished loading
     NSString * requestURL = [[[connection originalRequest] URL] description];
    
+    //case: login request finished loading
+    //check if login is successful
     if([requestURL hasSuffix:@"user.php"] ){
 
         [self hasValidSession:connect.url];
     }
+    //case: applicationList request finished loading
+    //convert JSON data into an array (applicationsData)
     else if([requestURL hasSuffix:@"app_list.php"] ){
         
         NSError *error;
@@ -392,7 +410,12 @@
     return YES;
 }
 
-//pass data between screens
+//-----------------------------------------------------------------------
+//
+// (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+// pass data between screens
+//
+//
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([[segue identifier] isEqualToString:@"editconnection"]) {
@@ -423,7 +446,6 @@
     
     NSURL *formulize_url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/user.php",url]];
     
-    // NSLog(@"checkURL:%@",[login_url description]);
     NSURLRequest *request = [NSURLRequest requestWithURL:formulize_url];
 
     NSURLResponse *response = nil;
@@ -464,6 +486,7 @@
     [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
     [request setHTTPBody:postData];
     
+    //Load Login Request
     NSURLConnection* connection = [NSURLConnection connectionWithRequest:request delegate:self];
     [connection start];
     
@@ -499,7 +522,7 @@
 //-----------------------------------------------------------------------
 //
 // getApplicationList: (NSString *) url
-//
+// send a request to URL to get JSON data (app list)
 //
 -(void)getApplicationList: (NSString *) url{
     

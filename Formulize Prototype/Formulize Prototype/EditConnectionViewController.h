@@ -38,10 +38,12 @@
 
 @property (strong, nonatomic) Connection *connect;
 
+- (void)backgroundTouched;
+
 - (IBAction)onoffSwitch:(id)sender;
 
 - (IBAction)updateConnection:(id)sender;
 
--(void)updateConnectionInDatabase:(id)sender;
+-(void)updateConnectionInDatabase;
 
 @end

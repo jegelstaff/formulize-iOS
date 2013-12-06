@@ -26,6 +26,10 @@
 
 - (void)viewDidLoad
 { 
+    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(backgroundTouched)];
+        
+    [scrollView addGestureRecognizer:tapGesture];
+    
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
 }
@@ -63,12 +67,24 @@
 	[super viewDidDisappear:animated];
 }
 
+//---------------------------------------------------------------------------
+//
+// (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+// supports portrait orientation
+//
+//
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     // Return YES for supported orientations
-    return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
+    return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
+//---------------------------------------------------------------------------
+//
+// (BOOL)textFieldShouldReturn:(UITextField *)textField 
+// hide keyboard and disable scrolling when return from a textfield
+//
+//
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     [textField resignFirstResponder];
@@ -77,18 +93,28 @@
     return YES;
 }
 
+//---------------------------------------------------------------------------
+//
+// (void)textFieldDidBeginEditing:(UITextField *)textField 
+// enable scrolling when textfield begins editing 
+//
+//
 -(void)textFieldDidBeginEditing:(UITextField *)textField{
     scrollView.scrollEnabled = YES;
-    scrollView.contentSize = CGSizeMake(200, 440);
+    scrollView.contentSize = CGSizeMake(300, 440);
    
     if(textField.frame.origin.y >=  usernameTextField.frame.origin.y){
-        CGPoint scrollPoint = CGPointMake(0, usernameTextField.frame.origin.y-30);
+        CGPoint scrollPoint = CGPointMake(0, usernameTextField.frame.origin.y-35);
         [scrollView setContentOffset:scrollPoint animated:YES];
     }
 }
 
-
-
+//---------------------------------------------------------------------------
+//
+// (IBAction)onoffSwitch:(id)sender 
+// Detect change in on/off switch
+//
+//
 - (IBAction)onoffSwitch:(id)sender {
     if([rememberMe isOn]){
         usernameTextField.enabled = YES;
@@ -106,7 +132,13 @@
     }
 }
 
-- (IBAction)backgroundTouched:(id)sender {
+//---------------------------------------------------------------------------
+//
+// (void)backgroundTouched 
+// hide keyboard and disable scrolling when touch down background
+//
+//
+- (void)backgroundTouched {
     [urlTextField resignFirstResponder];
     [usernameTextField resignFirstResponder];
     [passwordTextField resignFirstResponder];
@@ -115,6 +147,12 @@
     [scrollView setContentOffset:CGPointZero animated:YES];
 }
 
+//---------------------------------------------------------------------------
+//
+// saveConnection:(id)sender
+// Save connection to database
+//
+//
 - (IBAction)saveConnection:(id)sender {
     
     NSString * validateURL = urlTextField.text;
@@ -129,11 +167,13 @@
     }
     
     ChooseConnectionViewController *connectionView = [[ChooseConnectionViewController alloc] init];
-    // User can decide to leave username or password blank.
-    // Need to make sure url is not blank
     
+    //---------------------------------------------------------------------------
+    //validate user Input
+    
+    // User can decide to leave username or password blank.
+    // case: URL textfiels is empty
     if([urlTextField.text isEqualToString:@""]){
-        NSLog(@"urlTextField is empty" );
         
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Required information is missing" 
                                 message:@"Please enter a URL" 
@@ -142,6 +182,7 @@
                       otherButtonTitles:nil];
         [alert show];
     }
+    // case: URL is not valid Formulize URL
     else if(![connectionView validateURL:validateURL]){
         NSLog(@"invalid formuize url" );
         
@@ -152,6 +193,9 @@
                                               otherButtonTitles:nil];
         [alert show];
     }
+    //---------------------------------------------------------------------------
+    // case: URL is not empty and is valid
+    // Attempt to add connection to database
     else{
         
         NSString *docsDir;
@@ -221,7 +265,12 @@
  
 }
 
-//Method to dismiss alert view
+//---------------------------------------------------------------------------
+//
+// dismissAlert:(UIAlertView *)alertView
+// Method to dismiss alert view
+//
+//
 -(void)dismissAlert:(UIAlertView *) alertView
 {
     [alertView dismissWithClickedButtonIndex:0 animated:YES];

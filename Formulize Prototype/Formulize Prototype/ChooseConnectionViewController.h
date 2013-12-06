@@ -18,7 +18,7 @@
     Connection *connect;
 }
 
-@property (strong, nonatomic) NSArray *applicationsData;
+@property (nonatomic, retain) NSArray *applicationsData;
 @property(nonatomic,retain) NSMutableData *appData;
 @property (nonatomic, retain) Connection *connect;
 @property(nonatomic,retain) activeConnection* CurrentConnection;

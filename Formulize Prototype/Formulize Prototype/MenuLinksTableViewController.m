@@ -29,12 +29,24 @@
 
 #pragma mark - TableView Data Source Methods
 
+//-----------------------------------------------------------------------
+//
+// TableView Data Source methods
+// numberOfRowsInSection
+//
+//
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return [MenuLinksText count];
 }
 
 
+//-----------------------------------------------------------------------
+//
+// TableView data Source methods
+// cellForRowAtIndexPath :(NSIndexPath *)indexPath
+//
+//
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = nil;
@@ -51,7 +63,13 @@
     return cell;
 }
 
-
+#pragma mark - TableView Delegate Methods
+//-----------------------------------------------------------------------
+//
+// TableView delegate methods
+// didSelectRowAtIndexPath
+//
+//
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     menuLink = [MenuLinksText objectAtIndex:indexPath.row];
@@ -70,7 +88,12 @@
 }
 
 
-
+//-----------------------------------------------------------------------
+//
+// (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+// pass data to next screen
+//
+//
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([[segue identifier] isEqualToString:@"sendScreen"]) {
@@ -84,6 +107,12 @@
     }
 }
 
+//-----------------------------------------------------------------------
+//
+// Logout method
+// request a logout using appDelegate logoutFromURL:myURL method
+//
+//
 - (IBAction) logout{
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     [appDelegate logoutFromURL:myURL];

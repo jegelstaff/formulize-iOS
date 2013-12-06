@@ -28,6 +28,13 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(backgroundTouched)];
+    
+    [scrollView addGestureRecognizer:tapGesture];
+    
+    //show connection data in textFields
+    
     urlNameTextField.text = connect.name;
     urlTextField.text = connect.url;
     if ([connect.username isEqualToString:@""] || [connect.password isEqualToString:@""])
@@ -79,12 +86,24 @@
 	[super viewDidDisappear:animated];
 }
 
+//-----------------------------------------------------------
+//
+// (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+// supports portrait orientation
+//
+//
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     // Return YES for supported orientations
-    return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
+    return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
+//---------------------------------------------------------------------------
+//
+// (IBAction)onoffSwitch:(id)sender 
+// Detect change in on/off switch
+//
+//
 - (IBAction)onoffSwitch:(id)sender {
     if([rememberMe isOn]){
         usernameTextField.enabled = YES;
@@ -101,6 +120,12 @@
     }
 }
 
+//---------------------------------------------------------------------------
+//
+// updateConnection:(id)sender
+// check before updating connection in database
+//
+//
 - (IBAction)updateConnection:(id)sender {
     
     NSString * validateURL = urlTextField.text;
@@ -114,10 +139,14 @@
         validateURL = [@"http://" stringByAppendingString: validateURL];
     }
     
+    //---------------------------------------------------------------------------
+    //validate user Input
+    
     ChooseConnectionViewController *connectionView = [[ChooseConnectionViewController alloc] init];
     // User can decide to leave username or password blank.
     // Need to make sure url is not blank
     
+     // case: URL textfiels is empty
     if([urlTextField.text isEqualToString:@""]){
         NSLog(@"urlTextField is empty" );
         
@@ -128,6 +157,7 @@
                                               otherButtonTitles:nil];
         [alert show];
     }
+     // case: URL is not valid Formulize URL
     else if(![connectionView validateURL:validateURL]){
         NSLog(@"invalid formuize url" );
         
@@ -138,6 +168,8 @@
                                               otherButtonTitles:nil];
         [alert show];
     }
+    //---------------------------------------------------------------------------
+    // case: URL is not empty and is valid
     else{
         
         if([urlNameTextField.text isEqualToString:@""]){
@@ -155,14 +187,20 @@
         self.connect.username = usernameTextField.text;
         self.connect.password = passwordTextField.text;
         
-        [self updateConnectionInDatabase:nil];
+        [self updateConnectionInDatabase];
         
         [self.navigationController popToRootViewControllerAnimated:YES];   
     }
     
 }
 
--(void)updateConnectionInDatabase:(id)sender
+//---------------------------------------------------------------------------
+//
+// (void)updateConnectionInDatabase
+// update connection in database
+//
+//
+-(void)updateConnectionInDatabase
 {
     NSInteger pk = self.connect.primaryKey;
     
@@ -208,6 +246,12 @@
     
 }
 
+//---------------------------------------------------------------------------
+//
+// (BOOL)textFieldShouldReturn:(UITextField *)textField 
+// hide keyboard and disable scrolling when return from a textfield
+//
+//
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     [textField resignFirstResponder];
@@ -216,7 +260,13 @@
     return YES;
 }
 
-- (IBAction)backgroundTouched:(id)sender {
+//---------------------------------------------------------------------------
+//
+// (void)backgroundTouched 
+// hide keyboard and disable scrolling when touch down background
+//
+//
+- (void)backgroundTouched {
     [urlTextField resignFirstResponder];
     [usernameTextField resignFirstResponder];
     [passwordTextField resignFirstResponder];
@@ -225,12 +275,18 @@
     [scrollView setContentOffset:CGPointZero animated:YES];
 }
 
+//---------------------------------------------------------------------------
+//
+// (void)textFieldDidBeginEditing:(UITextField *)textField 
+// enable scrolling when textfield begins editing 
+//
+//
 -(void)textFieldDidBeginEditing:(UITextField *)textField{
     scrollView.scrollEnabled = YES;
     scrollView.contentSize = CGSizeMake(200, 440);
     
     if(textField.frame.origin.y >=  usernameTextField.frame.origin.y){
-        CGPoint scrollPoint = CGPointMake(0, usernameTextField.frame.origin.y-30);
+        CGPoint scrollPoint = CGPointMake(0, usernameTextField.frame.origin.y-35);
         [scrollView setContentOffset:scrollPoint animated:YES];
     }
 }
