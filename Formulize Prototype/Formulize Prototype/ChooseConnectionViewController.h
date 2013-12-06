@@ -16,6 +16,8 @@
     AppDelegate *appDelegate;
     NSArray* applicationsData;
     Connection *connect;
+    NSMutableData *appData;
+    activeConnection* CurrentConnection;
 }
 
 @property (nonatomic, retain) NSArray *applicationsData;

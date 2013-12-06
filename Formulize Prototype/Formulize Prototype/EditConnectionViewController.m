@@ -148,8 +148,6 @@
     
      // case: URL textfiels is empty
     if([urlTextField.text isEqualToString:@""]){
-        NSLog(@"urlTextField is empty" );
-        
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Required information is missing" 
                                                         message:@"Please enter a URL" 
                                                        delegate:nil 
@@ -159,7 +157,6 @@
     }
      // case: URL is not valid Formulize URL
     else if(![connectionView validateURL:validateURL]){
-        NSLog(@"invalid formuize url" );
         
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Invalid Formuize URL" 
                                                         message:@"Please enter a valid Formulize URL" 
@@ -235,15 +232,34 @@
     sqlite3_exec(formulizeDB, "COMMIT", NULL, NULL, &errmsg);
     
     if(SQLITE_DONE != sqlite3_step(updateStmt)){
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:@"Unable to update connection!" delegate:self cancelButtonTitle:nil otherButtonTitles:nil];
+        [alert show];
+        [self performSelector:@selector(dismissAlert:) withObject:alert afterDelay:1.0f];
         NSLog(@"Error while updating. %s", sqlite3_errmsg(formulizeDB));
     }
     else{
-        NSLog(@"Connection updated");
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:@"Connection updated!" delegate:self cancelButtonTitle:nil otherButtonTitles:nil];
+        [alert show];
+        [self performSelector:@selector(dismissAlert:) withObject:alert afterDelay:1.0f];
     }
     sqlite3_finalize(updateStmt);
     sqlite3_close(formulizeDB);
 
     
+}
+
+
+
+//---------------------------------------------------------------------------
+//
+// (void)dismissAlert:(UIAlertView *) alertView
+// Method to dismiss alert view
+//
+//
+
+-(void)dismissAlert:(UIAlertView *) alertView
+{
+    [alertView dismissWithClickedButtonIndex:0 animated:YES];
 }
 
 //---------------------------------------------------------------------------

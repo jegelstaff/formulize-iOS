@@ -10,9 +10,11 @@
 #import <Foundation/Foundation.h>
 #import "AppDelegate.h"
 
-@interface screenWebViewController : UIViewController <UIWebViewDelegate>{
+@interface screenWebViewController : UIViewController <UIWebViewDelegate>
+{
     UIWebView* myview;
-
+    NSDictionary *menuLink;
+    NSString *myURL;
 }
 @property(nonatomic, retain)IBOutlet UIWebView* myview;
 @property(nonatomic, strong, retain)  NSDictionary *menuLink;
