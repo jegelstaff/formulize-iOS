@@ -30,6 +30,7 @@
 		44E208E1181AD4B500EE9771 /* ApplicationTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 44E208E0181AD4B500EE9771 /* ApplicationTableViewController.m */; };
 		44EBF7CC183608E800238DAB /* Connection.m in Sources */ = {isa = PBXBuildFile; fileRef = 44EBF7CB183608E800238DAB /* Connection.m */; };
 		44EBF7CE1836097E00238DAB /* formulizeios.db in Resources */ = {isa = PBXBuildFile; fileRef = 44EBF7CD1836097E00238DAB /* formulizeios.db */; };
+		6254FDEA187BDAA40006F4CB /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6254FDE9187BDAA40006F4CB /* Default-568h@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -68,6 +69,7 @@
 		44EBF7CA183608E800238DAB /* Connection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Connection.h; sourceTree = "<group>"; };
 		44EBF7CB183608E800238DAB /* Connection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Connection.m; sourceTree = "<group>"; };
 		44EBF7CD1836097E00238DAB /* formulizeios.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = formulizeios.db; sourceTree = "<group>"; };
+		6254FDE9187BDAA40006F4CB /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,6 +90,7 @@
 		4493F69A18086FFC002C636B = {
 			isa = PBXGroup;
 			children = (
+				6254FDE9187BDAA40006F4CB /* Default-568h@2x.png */,
 				254F794618308CC700080B80 /* Default.png */,
 				254F794318308CB300080B80 /* Default@2x.png */,
 				44DB8E54182C565500F89F96 /* libsqlite3.0.dylib */,
@@ -212,6 +215,7 @@
 				4493F6B418086FFC002C636B /* InfoPlist.strings in Resources */,
 				4493F6BD18086FFC002C636B /* MainStoryboard.storyboard in Resources */,
 				4493F6C718087042002C636B /* Icon.png in Resources */,
+				6254FDEA187BDAA40006F4CB /* Default-568h@2x.png in Resources */,
 				4493F6C918087048002C636B /* Icon114.png in Resources */,
 				254F794418308CB300080B80 /* Default@2x.png in Resources */,
 				254F794718308CC700080B80 /* Default.png in Resources */,
