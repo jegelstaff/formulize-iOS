@@ -21,7 +21,7 @@
     NSString* screen = [menuLink objectForKey:@"screen"];
     
     [self setTitle:[menuLink objectForKey:@"text"]];
-    NSString *url = [NSString stringWithFormat:@"%@/modules/formulize/index.php?%@",myURL, screen];
+    NSString *url = [NSString stringWithFormat:@"%@/modules/formulize/plain.php?%@",myURL, screen];
 
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:url]];
     

@@ -240,9 +240,9 @@
     
     NSString * requestURL = [[[connection originalRequest] URL] description];
     
-    if([requestURL hasSuffix:@"/isUserLoggedIn.php"] ){
+    if([requestURL hasSuffix:@"/modules/formulize/isUserLoggedIn.php"] ){
         
-        requestURL=[requestURL stringByReplacingOccurrencesOfString:@"/isUserLoggedIn.php" withString:@""];
+        requestURL=[requestURL stringByReplacingOccurrencesOfString:@"/modules/formulize/isUserLoggedIn.php" withString:@""];
         
         NSString* urldata =[[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
         
@@ -273,7 +273,7 @@
 -(void)extendSession: (NSString *) url{
     
     // send a request to server to keep the session alive 
-    NSString *extendSessionURLstr = [NSString stringWithFormat:@"%@/isUserLoggedIn.php",url];
+    NSString *extendSessionURLstr = [NSString stringWithFormat:@"%@/modules/formulize/isUserLoggedIn.php",url];
     
     NSURL *extendSessionURL=[NSURL URLWithString:extendSessionURLstr];
     

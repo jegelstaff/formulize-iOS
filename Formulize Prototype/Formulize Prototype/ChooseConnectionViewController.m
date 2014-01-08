@@ -250,7 +250,7 @@
     
     // connection is starting, clear buffer
     NSString * requestURL = [[[connection originalRequest] URL] description];
-    if([requestURL hasSuffix:@"app_list.php"] ){
+    if([requestURL hasSuffix:@"/modules/formulize/app_list.php"] ){
         [self.appData setLength:0];
     }
 }
@@ -296,7 +296,7 @@
         
     }
      //case: recieved application list data 
-    else if ([requestURL hasSuffix:@"app_list.php"] ){
+    else if ([requestURL hasSuffix:@"/modules/formulize/app_list.php"] ){
         if(appData == nil){
             appData = [NSMutableData dataWithData:data];
         }
@@ -328,7 +328,7 @@
     }
     //case: applicationList request finished loading
     //convert JSON data into an array (applicationsData)
-    else if([requestURL hasSuffix:@"app_list.php"] ){
+    else if([requestURL hasSuffix:@"/modules/formulize/app_list.php"] ){
         
         NSError *error;
         applicationsData = [NSJSONSerialization JSONObjectWithData:appData options:NSJSONReadingMutableContainers error:&error];
@@ -505,7 +505,7 @@
 -(void)hasValidSession: (NSString *) url{
     
     //new request to check if user is logged in
-    NSString *check_login_url_str = [NSString stringWithFormat:@"%@/isUserLoggedIn.php",url];
+    NSString *check_login_url_str = [NSString stringWithFormat:@"%@/modules/formulize/isUserLoggedIn.php",url];
 
     NSURL *check_login_url=[NSURL URLWithString:check_login_url_str];
 
@@ -526,7 +526,7 @@
 //
 -(void)getApplicationList: (NSString *) url{
     
-    NSString* app_list_url_str = [NSString stringWithFormat:@"%@/app_list.php", url];
+    NSString* app_list_url_str = [NSString stringWithFormat:@"%@/modules/formulize/app_list.php", url];
     NSURL *app_list_url =[NSURL URLWithString:app_list_url_str];
     
     NSURLRequest* request = [NSURLRequest requestWithURL:app_list_url];
