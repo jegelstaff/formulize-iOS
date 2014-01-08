@@ -17,7 +17,6 @@
     NSMutableArray *activeConnections;
     NSTimer* timerCheckSessionStatus;
     float timerIntervalInSeconds;
-    NSMutableArray *activeConnections;
 }
 
 @property (strong, nonatomic) UIWindow *window;
@@ -31,6 +30,6 @@
 - (void)removeActiveConnection:(NSString *)url;
 - (void)extendSession: (NSString *) url;
 - (void)keepSessionAlive:(NSTimer *)timer;
--(void)validateLogin:(NSString*)url :(NSString*)username :(NSString*)password;
+- (void)validateLogin:(NSString*)url :(NSString*)username :(NSString*)password;
 
 @end
