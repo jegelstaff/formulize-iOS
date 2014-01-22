@@ -42,14 +42,14 @@
 		25C0457D184DE4270056D567 /* notLoggedInIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = notLoggedInIcon.png; sourceTree = "<group>"; };
 		4455478F183E548C0067AF11 /* EditConnectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditConnectionViewController.h; sourceTree = "<group>"; };
 		44554790183E548C0067AF11 /* EditConnectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditConnectionViewController.m; sourceTree = "<group>"; };
-		4493F6A518086FFC002C636B /* Formulize Prototype.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Formulize Prototype.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		4493F6A518086FFC002C636B /* Formulize.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Formulize.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4493F6A918086FFC002C636B /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		4493F6AB18086FFC002C636B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		4493F6AD18086FFC002C636B /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		4493F6B118086FFC002C636B /* Formulize Prototype-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Formulize Prototype-Info.plist"; sourceTree = "<group>"; };
+		4493F6B118086FFC002C636B /* Formulize-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Formulize-Info.plist"; sourceTree = "<group>"; };
 		4493F6B318086FFC002C636B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		4493F6B518086FFC002C636B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		4493F6B718086FFC002C636B /* Formulize Prototype-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Formulize Prototype-Prefix.pch"; sourceTree = "<group>"; };
+		4493F6B718086FFC002C636B /* Formulize-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Formulize-Prefix.pch"; sourceTree = "<group>"; };
 		4493F6B818086FFC002C636B /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		4493F6B918086FFC002C636B /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		4493F6BC18086FFC002C636B /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
@@ -107,7 +107,7 @@
 		4493F6A618086FFC002C636B /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				4493F6A518086FFC002C636B /* Formulize Prototype.app */,
+				4493F6A518086FFC002C636B /* Formulize.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -153,10 +153,10 @@
 			isa = PBXGroup;
 			children = (
 				44EBF7CD1836097E00238DAB /* formulizeios.db */,
-				4493F6B118086FFC002C636B /* Formulize Prototype-Info.plist */,
+				4493F6B118086FFC002C636B /* Formulize-Info.plist */,
 				4493F6B218086FFC002C636B /* InfoPlist.strings */,
 				4493F6B518086FFC002C636B /* main.m */,
-				4493F6B718086FFC002C636B /* Formulize Prototype-Prefix.pch */,
+				4493F6B718086FFC002C636B /* Formulize-Prefix.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -164,9 +164,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		4493F6A418086FFC002C636B /* Formulize Prototype */ = {
+		4493F6A418086FFC002C636B /* Formulize */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 4493F6C318086FFC002C636B /* Build configuration list for PBXNativeTarget "Formulize Prototype" */;
+			buildConfigurationList = 4493F6C318086FFC002C636B /* Build configuration list for PBXNativeTarget "Formulize" */;
 			buildPhases = (
 				4493F6A118086FFC002C636B /* Sources */,
 				4493F6A218086FFC002C636B /* Frameworks */,
@@ -176,9 +176,9 @@
 			);
 			dependencies = (
 			);
-			name = "Formulize Prototype";
+			name = Formulize;
 			productName = "Formulize Prototype";
-			productReference = 4493F6A518086FFC002C636B /* Formulize Prototype.app */;
+			productReference = 4493F6A518086FFC002C636B /* Formulize.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -190,7 +190,7 @@
 				LastUpgradeCheck = 0420;
 				ORGANIZATIONNAME = "Laurentian University";
 			};
-			buildConfigurationList = 4493F69F18086FFC002C636B /* Build configuration list for PBXProject "Formulize Prototype" */;
+			buildConfigurationList = 4493F69F18086FFC002C636B /* Build configuration list for PBXProject "Formulize" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -202,7 +202,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				4493F6A418086FFC002C636B /* Formulize Prototype */,
+				4493F6A418086FFC002C636B /* Formulize */,
 			);
 		};
 /* End PBXProject section */
@@ -316,10 +316,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Formulize Prototype/Formulize Prototype-Prefix.pch";
-				INFOPLIST_FILE = "Formulize Prototype/Formulize Prototype-Info.plist";
+				GCC_PREFIX_HEADER = "Formulize Prototype/Formulize-Prefix.pch";
+				INFOPLIST_FILE = "Formulize Prototype/Formulize-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Formulize;
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
@@ -329,10 +329,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Formulize Prototype/Formulize Prototype-Prefix.pch";
-				INFOPLIST_FILE = "Formulize Prototype/Formulize Prototype-Info.plist";
+				GCC_PREFIX_HEADER = "Formulize Prototype/Formulize-Prefix.pch";
+				INFOPLIST_FILE = "Formulize Prototype/Formulize-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Formulize;
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
@@ -341,7 +341,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		4493F69F18086FFC002C636B /* Build configuration list for PBXProject "Formulize Prototype" */ = {
+		4493F69F18086FFC002C636B /* Build configuration list for PBXProject "Formulize" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				4493F6C118086FFC002C636B /* Debug */,
@@ -350,7 +350,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		4493F6C318086FFC002C636B /* Build configuration list for PBXNativeTarget "Formulize Prototype" */ = {
+		4493F6C318086FFC002C636B /* Build configuration list for PBXNativeTarget "Formulize" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				4493F6C418086FFC002C636B /* Debug */,
