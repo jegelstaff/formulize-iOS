@@ -227,25 +227,23 @@
             sqlite3_bind_text(updateStmt, 4, [passwordTextField.text UTF8String], -1, SQLITE_TRANSIENT);
             sqlite3_bind_int(updateStmt, 5, pk);
         }
-    }
-    char* errmsg;
-    sqlite3_exec(formulizeDB, "COMMIT", NULL, NULL, &errmsg);
-    
-    if(SQLITE_DONE != sqlite3_step(updateStmt)){
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:@"Unable to update connection!" delegate:self cancelButtonTitle:nil otherButtonTitles:nil];
-        [alert show];
-        [self performSelector:@selector(dismissAlert:) withObject:alert afterDelay:1.0f];
-        NSLog(@"Error while updating. %s", sqlite3_errmsg(formulizeDB));
-    }
-    else{
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:@"Connection updated!" delegate:self cancelButtonTitle:nil otherButtonTitles:nil];
-        [alert show];
-        [self performSelector:@selector(dismissAlert:) withObject:alert afterDelay:1.0f];
-    }
-    sqlite3_finalize(updateStmt);
-    sqlite3_close(formulizeDB);
+        char* errmsg;
+        sqlite3_exec(formulizeDB, "COMMIT", NULL, NULL, &errmsg);
 
-    
+        if(SQLITE_DONE != sqlite3_step(updateStmt)){
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:@"Unable to update connection!" delegate:self cancelButtonTitle:nil otherButtonTitles:nil];
+            [alert show];
+            [self performSelector:@selector(dismissAlert:) withObject:alert afterDelay:1.0f];
+            NSLog(@"Error while updating. %s", sqlite3_errmsg(formulizeDB));
+        }
+        else{
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:@"Connection updated!" delegate:self cancelButtonTitle:nil otherButtonTitles:nil];
+            [alert show];
+            [self performSelector:@selector(dismissAlert:) withObject:alert afterDelay:1.0f];
+        }
+        sqlite3_finalize(updateStmt);
+        sqlite3_close(formulizeDB);
+    }
 }
 
 
