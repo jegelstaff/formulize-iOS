@@ -29,6 +29,7 @@
 		44E208E1181AD4B500EE9771 /* ApplicationTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 44E208E0181AD4B500EE9771 /* ApplicationTableViewController.m */; };
 		44EBF7CC183608E800238DAB /* Connection.m in Sources */ = {isa = PBXBuildFile; fileRef = 44EBF7CB183608E800238DAB /* Connection.m */; };
 		44EBF7CE1836097E00238DAB /* formulizeios.db in Resources */ = {isa = PBXBuildFile; fileRef = 44EBF7CD1836097E00238DAB /* formulizeios.db */; };
+		621241C718908F6A00861541 /* Icon-114.png in Resources */ = {isa = PBXBuildFile; fileRef = 624BA9441890661A0017C057 /* Icon-114.png */; };
 		6254FDEA187BDAA40006F4CB /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6254FDE9187BDAA40006F4CB /* Default-568h@2x.png */; };
 		628CBD1018906AC200FBAFF6 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 628CBD0F18906AC200FBAFF6 /* Images.xcassets */; };
 /* End PBXBuildFile section */
@@ -225,6 +226,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4493F6B418086FFC002C636B /* InfoPlist.strings in Resources */,
+				621241C718908F6A00861541 /* Icon-114.png in Resources */,
 				628CBD1018906AC200FBAFF6 /* Images.xcassets in Resources */,
 				4493F6BD18086FFC002C636B /* MainStoryboard.storyboard in Resources */,
 				4493F6C718087042002C636B /* Icon-512.png in Resources */,
