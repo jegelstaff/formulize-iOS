@@ -134,7 +134,7 @@
    @synchronized(appDelegate.activeConnections){
     for (activeConnection * item in appDelegate.activeConnections){
         if(item.pKey == cn.primaryKey){
-            path = [[NSBundle mainBundle] pathForResource:@"Icon114" ofType:@"png"];
+            path = [[NSBundle mainBundle] pathForResource:@"Icon-114" ofType:@"png"];
         }
     }
    }

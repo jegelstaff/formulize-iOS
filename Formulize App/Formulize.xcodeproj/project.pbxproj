@@ -21,8 +21,7 @@
 		4493F6BA18086FFC002C636B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4493F6B918086FFC002C636B /* AppDelegate.m */; };
 		4493F6BD18086FFC002C636B /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4493F6BB18086FFC002C636B /* MainStoryboard.storyboard */; };
 		4493F6C018086FFC002C636B /* AddConnectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4493F6BF18086FFC002C636B /* AddConnectionViewController.m */; };
-		4493F6C718087042002C636B /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 4493F6C618087042002C636B /* Icon.png */; };
-		4493F6C918087048002C636B /* Icon114.png in Resources */ = {isa = PBXBuildFile; fileRef = 4493F6C818087048002C636B /* Icon114.png */; };
+		4493F6C718087042002C636B /* Icon-512.png in Resources */ = {isa = PBXBuildFile; fileRef = 4493F6C618087042002C636B /* Icon-512.png */; };
 		44CD12C21836A6EF00B5F539 /* MenuLinksTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 44CD12BF1836A6EF00B5F539 /* MenuLinksTableViewController.m */; };
 		44CD12C31836A6EF00B5F539 /* screenWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 44CD12C11836A6EF00B5F539 /* screenWebViewController.m */; };
 		44DB8E55182C565500F89F96 /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 44DB8E54182C565500F89F96 /* libsqlite3.0.dylib */; };
@@ -31,6 +30,7 @@
 		44EBF7CC183608E800238DAB /* Connection.m in Sources */ = {isa = PBXBuildFile; fileRef = 44EBF7CB183608E800238DAB /* Connection.m */; };
 		44EBF7CE1836097E00238DAB /* formulizeios.db in Resources */ = {isa = PBXBuildFile; fileRef = 44EBF7CD1836097E00238DAB /* formulizeios.db */; };
 		6254FDEA187BDAA40006F4CB /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6254FDE9187BDAA40006F4CB /* Default-568h@2x.png */; };
+		628CBD1018906AC200FBAFF6 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 628CBD0F18906AC200FBAFF6 /* Images.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -55,8 +55,7 @@
 		4493F6BC18086FFC002C636B /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
 		4493F6BE18086FFC002C636B /* AddConnectionViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddConnectionViewController.h; sourceTree = "<group>"; };
 		4493F6BF18086FFC002C636B /* AddConnectionViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddConnectionViewController.m; sourceTree = "<group>"; };
-		4493F6C618087042002C636B /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Icon.png; path = Images/Icon.png; sourceTree = "<group>"; };
-		4493F6C818087048002C636B /* Icon114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Icon114.png; path = Images/Icon114.png; sourceTree = "<group>"; };
+		4493F6C618087042002C636B /* Icon-512.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-512.png"; path = "Images/Icon-512.png"; sourceTree = "<group>"; };
 		44CD12BE1836A6EF00B5F539 /* MenuLinksTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuLinksTableViewController.h; sourceTree = "<group>"; };
 		44CD12BF1836A6EF00B5F539 /* MenuLinksTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuLinksTableViewController.m; sourceTree = "<group>"; };
 		44CD12C01836A6EF00B5F539 /* screenWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = screenWebViewController.h; sourceTree = "<group>"; };
@@ -69,7 +68,14 @@
 		44EBF7CA183608E800238DAB /* Connection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Connection.h; sourceTree = "<group>"; };
 		44EBF7CB183608E800238DAB /* Connection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Connection.m; sourceTree = "<group>"; };
 		44EBF7CD1836097E00238DAB /* formulizeios.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = formulizeios.db; sourceTree = "<group>"; };
+		624BA9441890661A0017C057 /* Icon-114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-114.png"; path = "Images/Icon-114.png"; sourceTree = "<group>"; };
 		6254FDE9187BDAA40006F4CB /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "Images/Default-568h@2x.png"; sourceTree = "<group>"; };
+		628CBD0F18906AC200FBAFF6 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = Formulize/Images.xcassets; sourceTree = "<group>"; };
+		62ED3E581890637B00F3DA21 /* Icon-57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-57.png"; path = "Images/Icon-57.png"; sourceTree = "<group>"; };
+		62ED3E591890638800F3DA21 /* Icon-120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-120.png"; path = "Images/Icon-120.png"; sourceTree = "<group>"; };
+		62ED3E5A1890639400F3DA21 /* Icon-29.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-29.png"; path = "Images/Icon-29.png"; sourceTree = "<group>"; };
+		62ED3E5B1890639D00F3DA21 /* Icon-58.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-58.png"; path = "Images/Icon-58.png"; sourceTree = "<group>"; };
+		62ED3E5C189063AB00F3DA21 /* Icon-80.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-80.png"; path = "Images/Icon-80.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,13 +96,19 @@
 		4493F69A18086FFC002C636B = {
 			isa = PBXGroup;
 			children = (
+				628CBD0F18906AC200FBAFF6 /* Images.xcassets */,
+				624BA9441890661A0017C057 /* Icon-114.png */,
+				62ED3E5C189063AB00F3DA21 /* Icon-80.png */,
+				62ED3E5B1890639D00F3DA21 /* Icon-58.png */,
+				62ED3E5A1890639400F3DA21 /* Icon-29.png */,
+				62ED3E591890638800F3DA21 /* Icon-120.png */,
+				62ED3E581890637B00F3DA21 /* Icon-57.png */,
 				6254FDE9187BDAA40006F4CB /* Default-568h@2x.png */,
 				254F794618308CC700080B80 /* Default.png */,
 				254F794318308CB300080B80 /* Default@2x.png */,
 				44DB8E54182C565500F89F96 /* libsqlite3.0.dylib */,
-				4493F6C818087048002C636B /* Icon114.png */,
 				25C0457D184DE4270056D567 /* notLoggedInIcon.png */,
-				4493F6C618087042002C636B /* Icon.png */,
+				4493F6C618087042002C636B /* Icon-512.png */,
 				2570438818493ED00094465B /* logo.png */,
 				4493F6AF18086FFC002C636B /* Formulize Prototype */,
 				4493F6A818086FFC002C636B /* Frameworks */,
@@ -187,7 +199,7 @@
 		4493F69C18086FFC002C636B /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0420;
+				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = "Laurentian University";
 			};
 			buildConfigurationList = 4493F69F18086FFC002C636B /* Build configuration list for PBXProject "Formulize" */;
@@ -213,10 +225,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				4493F6B418086FFC002C636B /* InfoPlist.strings in Resources */,
+				628CBD1018906AC200FBAFF6 /* Images.xcassets in Resources */,
 				4493F6BD18086FFC002C636B /* MainStoryboard.storyboard in Resources */,
-				4493F6C718087042002C636B /* Icon.png in Resources */,
+				4493F6C718087042002C636B /* Icon-512.png in Resources */,
 				6254FDEA187BDAA40006F4CB /* Default-568h@2x.png in Resources */,
-				4493F6C918087048002C636B /* Icon114.png in Resources */,
 				254F794418308CB300080B80 /* Default@2x.png in Resources */,
 				254F794718308CC700080B80 /* Default.png in Resources */,
 				44EBF7CE1836097E00238DAB /* formulizeios.db in Resources */,
@@ -271,8 +283,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -284,10 +301,15 @@
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -296,14 +318,23 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
@@ -315,6 +346,8 @@
 		4493F6C418086FFC002C636B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Formulize Prototype/Formulize-Prefix.pch";
 				INFOPLIST_FILE = "Formulize Prototype/Formulize-Info.plist";
@@ -328,6 +361,8 @@
 		4493F6C518086FFC002C636B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Formulize Prototype/Formulize-Prefix.pch";
 				INFOPLIST_FILE = "Formulize Prototype/Formulize-Info.plist";
