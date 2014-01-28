@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1699A0A118976A0400B56929 /* iPad_Storyboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1699A0A018976A0400B56929 /* iPad_Storyboard.storyboard */; };
 		2549DA3F183F274B00FE7329 /* activeConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 2549DA3E183F274B00FE7329 /* activeConnection.m */; };
 		254F794418308CB300080B80 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 254F794318308CB300080B80 /* Default@2x.png */; };
 		254F794718308CC700080B80 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 254F794618308CC700080B80 /* Default.png */; };
@@ -35,6 +36,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1699A0A018976A0400B56929 /* iPad_Storyboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = iPad_Storyboard.storyboard; sourceTree = "<group>"; };
 		2549DA3D183F274B00FE7329 /* activeConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = activeConnection.h; sourceTree = "<group>"; };
 		2549DA3E183F274B00FE7329 /* activeConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = activeConnection.m; sourceTree = "<group>"; };
 		254F794318308CB300080B80 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default@2x.png"; path = "Images/Default@2x.png"; sourceTree = "<group>"; };
@@ -94,9 +96,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1699A0A218976B1C00B56929 /* iPad */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = iPad;
+			sourceTree = "<group>";
+		};
 		4493F69A18086FFC002C636B = {
 			isa = PBXGroup;
 			children = (
+				1699A0A218976B1C00B56929 /* iPad */,
 				628CBD0F18906AC200FBAFF6 /* Images.xcassets */,
 				624BA9441890661A0017C057 /* Icon-114.png */,
 				62ED3E5C189063AB00F3DA21 /* Icon-80.png */,
@@ -147,6 +157,7 @@
 				4493F6B818086FFC002C636B /* AppDelegate.h */,
 				4493F6B918086FFC002C636B /* AppDelegate.m */,
 				4493F6BB18086FFC002C636B /* MainStoryboard.storyboard */,
+				1699A0A018976A0400B56929 /* iPad_Storyboard.storyboard */,
 				4493F6BE18086FFC002C636B /* AddConnectionViewController.h */,
 				4493F6BF18086FFC002C636B /* AddConnectionViewController.m */,
 				4455478F183E548C0067AF11 /* EditConnectionViewController.h */,
@@ -236,6 +247,7 @@
 				44EBF7CE1836097E00238DAB /* formulizeios.db in Resources */,
 				2570438918493ED00094465B /* logo.png in Resources */,
 				25C0457E184DE4270056D567 /* notLoggedInIcon.png in Resources */,
+				1699A0A118976A0400B56929 /* iPad_Storyboard.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -353,9 +365,9 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Formulize Prototype/Formulize-Prefix.pch";
 				INFOPLIST_FILE = "Formulize Prototype/Formulize-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = Formulize;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -368,9 +380,9 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Formulize Prototype/Formulize-Prefix.pch";
 				INFOPLIST_FILE = "Formulize Prototype/Formulize-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = Formulize;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
